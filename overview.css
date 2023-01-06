@@ -68,7 +68,6 @@ h2{color:white;font-size: 2rem; margin-top:20px; text-align:center;}
 h3{color:white;font-size: 1.7rem; margin-top:20px; margin-left:40px; text-align:left;}
 p{margin:20px 50px; color:white; line-height:1.5em;}
 ul{margin:20px 50px; color:white;  line-height:1.5em; font-weight:bold;}
-table, th, td{width:100%; font-weight: bold; color:white; border:1px solid white; margin-left:30px;}
 
 test{overflow: hidden;}
 .box-1 {
@@ -76,7 +75,7 @@ test{overflow: hidden;}
   grid-column-end:2;
   grid-row-start: 1;
   grid-row-end: 3;background-color:#0d728e;
- padding:10px; border-radius: 30px;  margin-left:15px;
+ padding:10px; border-radius: 30px;
 }
 .images{height:250px; margin-left:50px;}
 
@@ -84,7 +83,7 @@ test{overflow: hidden;}
   grid-column-start:2;
   grid-column-end: 4;
   grid-row-start: 1;
-  grid-row-end:7;
+  grid-row-end:6;
   background-color:#0d728e;
  margin:0 50px 0 0 ; padding:10px; border-radius: 30px;
 }
