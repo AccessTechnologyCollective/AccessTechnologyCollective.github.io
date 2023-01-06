@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Access Technology Collective</title>
+<link href="styles.css" rel="stylesheet" type="text/css">
+	 <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+	/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}</style>
+</head>
+<body>
+  <header>
+    <!-- NAVIGATION START -->
+    <img class="logo" src="images/atc white.png" alt="ATC logo"/>
+		 <h1>Access<br>Technology<br>Collective</h1>
+
+<div class="topnav" id="myTopnav">
+  <a href="index.html" class="active">Home</a>
+	<a href="overview.html">Overview</a>
+  <a href="reading.html">Reading</a>
+  <a href="hearing.html">Hearing</a>
+  <a href="vision.html">Vision</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+</nav>
+  </header>
+     <!-- end nav -->
+
+
+     <!-- Content -->
+ <div class="wrapper">
+	 <div class="intro">
+		 <h2>The ATC Presents <br> Spring 2023 Learning Series - iOS Accessibility <br>January 25th and 26th</h2>
+    <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/8sX9IEHWRJ8" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		 <div class="test">
+       <p>The ATC is excited to be able to offer a series of presentations centered around the amazing accessibility features available on iOS mobile devices including iPhones, iPads and the Apple Watch.</p>
+		 <p>Inspired by Apple's latest "The Greatest" campaign, we will be offering four one-hour sessions covering a range of accessibility topics over two days. Select topic info buttons below for more details and registration links. Join us for the greatest ATC Spring learning series ever!</p>
+		 <p>Sessions open to all faculty, staff and students of Region E. <br>Flex Credit Available. Accommodation requests or inquiries please contact <a style="color: white;"" href="htcdsps21@gmail.com">htcdsps21@gmail.com</a> by January 18th.</p>
+			 </div>
+		
+  </div>
+   <div class="box-1">
+	   <h3>Accessibility Overview<br> Wednesday, Jan. 26  - 12pm</h3>
+     <img class="pix" src="images/overview icon.png" alt="icon of finger touching a smartphone"/>
+	   <div class="test">
+       <p>This session will present a general overview of the various accessibility features available on Apple devices. Join us to experience the future of accessibility!</p></div>
+	   <a href="overview.html" class="header-btn">Overview Details</a>
+	 </div>
+   <div class="box-2">
+	   <h3>Reading<br> Wednesday, Jan. 26 - 1pm</h3>
+     <img class="pix" src="images/reading-icon.png" alt="icon of person holding an open book"/>
+	    <div class="test">
+   <p> Enhance your reading and writing with audio. Hear your entire screen read aloud with Speak Screen. Strip away ads, buttons, and navigation bars, so you can focus on only the content you need. </p></div>
+          <a href="reading.html" class="header-btn">Reading Details</a>
+			
+   </div>
+<div class="box-3">
+	<h3>Hearing<br> Thursday Jan. 26th - 9am</h3>
+  <img class="pix" src="images/hearing icon.png" alt="icon of ear and sound"/>
+		    <div class="test">
+<p>New! Live Captions feature offers real-time, on-device-generated transcriptions, and Sound Recognition listens for certain sounds and uses on‑device intelligence to notify you when they are detected. </p></div>
+       <a href="hearing.html" class="header-btn">Hearing Details</a>
+</div>
+   <div class="box-4">
+<h3>Vision<br> Thursday Jan. 26th - 10am</h3>
+     <img class="pix" src="images/vision icon.png" alt="eye icon"/>
+	   	    <div class="test">
+	   <p>All things vision at this workshop! Learn how to make your device work for you. We will cover text size, display settings, dictation, magnification, Voice Over, and more! </p></div>
+				<a href="vision.html" class="header-btn glass-button">Vision Details</a>
+     
+</div>
+<footer class="info">
+	<p>ATC Access Technology Collective 2023<br>
+	Region E Learning Series<br>
+These trainings and the  Access Technology Collective are not affilated with Apple Inc</p>
+	
+</footer>
+  </body>
+     </html>
