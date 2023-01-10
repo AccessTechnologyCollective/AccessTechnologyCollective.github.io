@@ -21,6 +21,7 @@ body{
 	font-size: 35px;
 	 line-height: 2.5rem;
 }
+a{color:white;}
 
 /* Add a black background color to the top navigation */
 .topnav {
