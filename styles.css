@@ -81,7 +81,7 @@ p{margin-top:20px; color:white; font-weight:bold; padding:0 20px; line-height: 1
   background-color:#017BFE;
  margin:10px 20px; padding:30px; border-radius: 30px;
 }
-.video{float:left; margin:40px 40px 90px 20px;}
+.video{float:left; margin:60px 40px 90px 20px;}
 .test{overflow: hidden;}
 .box-1 {
   grid-column: span 1;
