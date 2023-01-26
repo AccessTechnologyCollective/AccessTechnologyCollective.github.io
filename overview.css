@@ -84,7 +84,7 @@ test{overflow: hidden;}
   grid-column-start:2;
   grid-column-end: 4;
   grid-row-start: 1;
-  grid-row-end:6;
+  grid-row-end:7;
   background-color:#0d728e;
  margin:0 50px 0 0 ; padding:10px; border-radius: 30px;
 }
