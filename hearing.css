@@ -81,7 +81,7 @@ table, th, td{width:90%; font-weight: bold; color:white; border:1px solid white;
   grid-column-start:2;
   grid-column-end: 4;
   grid-row-start: 1;
-  grid-row-end: 7;
+  grid-row-end: 8;
   background-color:#19846C;
  margin:0 50px 0 0 ; padding:10px; border-radius: 30px;
 }
