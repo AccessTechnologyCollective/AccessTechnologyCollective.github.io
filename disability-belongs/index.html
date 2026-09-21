@@ -17,10 +17,7 @@
       --blue: #31A9E0;
       --white: #FFFFFF;
 
-      /* Same size for Be / Belong / Become */
       --main-size: clamp(38px, 5vw, 58px);
-
-      /* Space between rotating word and Belong */
       --subject-gap: 18px;
     }
 
@@ -70,11 +67,6 @@
 
     /* ---------------------------------
        FIXED BRAND SPINE
-
-             Be.
-             Belong.
-             Become.
-
     ---------------------------------- */
 
     .message {
@@ -101,11 +93,6 @@
       text-align: left;
     }
 
-    /*
-      Be, Belong and Become all use
-      the exact same font size.
-    */
-
     .brand,
     .belong-wrap {
       font-size: var(--main-size);
@@ -119,7 +106,7 @@
     }
 
     /* ---------------------------------
-       BELONG
+       BELONG / BELONGS
     ---------------------------------- */
 
     .line-middle {
@@ -130,25 +117,23 @@
       display: inline-flex;
       align-items: baseline;
 
-      color: var(--blue);
+      color: var(--white);
 
       white-space: nowrap;
     }
 
- .blue {
-  color: var(--blue);
-}
+    .belong-word,
+    .ending {
+      color: var(--white);
+    }
 
-.ending {
-  color: var(--white);
-}
+    .ending {
+      display: inline;
+    }
 
     /* ---------------------------------
        ROTATING SUBJECT
-
-       Positioned independently so
-       I / You / We / Disability never
-       move the Be-Belong-Become spine.
+       I / You / We / Disability
     ---------------------------------- */
 
     .subject-wrap {
@@ -177,7 +162,7 @@
       font-weight: 600;
       letter-spacing: -0.02em;
 
-      color: var(--white);
+      color: var(--blue);
 
       white-space: nowrap;
 
@@ -271,42 +256,43 @@
        RESPONSIVE
     ---------------------------------- */
 
-   @media (max-width: 700px) {
+    @media (max-width: 700px) {
 
-  :root {
-    --main-size: clamp(28px, 7vw, 40px);
-    --subject-gap: 8px;
-  }
+      :root {
+        --main-size: clamp(28px, 7vw, 40px);
+        --subject-gap: 8px;
+      }
 
-  .subject-wrap {
-    width: 9ch;
-  }
+      .subject-wrap {
+        width: 9ch;
+      }
 
-  .banner {
-    padding: 18px 12px 12px;
-  }
+      .banner {
+        padding: 18px 12px 12px;
+      }
 
-  .controls {
-    margin-top: 16px;
-  }
-}
+      .controls {
+        margin-top: 16px;
+      }
+    }
 
-@media (max-width: 430px) {
+    @media (max-width: 430px) {
 
-  :root {
-    --main-size: clamp(26px, 7.5vw, 34px);
-    --subject-gap: 6px;
-  }
+      :root {
+        --main-size: clamp(26px, 7.5vw, 34px);
+        --subject-gap: 6px;
+      }
 
-  .subject-wrap {
-    width: 8.5ch;
-  }
+      .subject-wrap {
+        width: 8.5ch;
+      }
 
-  .banner {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-}
+      .banner {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+    }
+
     /* ---------------------------------
        REDUCED MOTION
     ---------------------------------- */
@@ -331,15 +317,12 @@
 
   <main class="banner">
 
-    <!--
-      Full static equivalent for screen readers.
-      The animated visual below is hidden from
-      assistive technology to avoid repeatedly
-      announcing changing text.
-    -->
-
     <p class="sr-only">
-      Be. Belong. Become. I belong. You belong. We belong. Disability belongs.
+      Be. Belong. Become.
+      I belong.
+      You belong.
+      We belong.
+      Disability belongs.
     </p>
 
 
@@ -360,7 +343,7 @@
         </span>
 
         <span class="belong-wrap">
-          <span class="blue">Belong</span><span
+          <span class="belong-word">Belong</span><span
             id="ending"
             class="ending"
           >.</span>
@@ -393,15 +376,6 @@
 
 
   <script>
-
-    /*
-      Rotating messages
-
-      I Belong.
-      You Belong.
-      We Belong.
-      Disability Belongs.
-    */
 
     const frames = [
       {
@@ -476,11 +450,6 @@
         "subject next";
 
 
-      /*
-        Forces the browser to recognize
-        the initial animation position.
-      */
-
       void nextEl.offsetWidth;
 
 
@@ -488,16 +457,6 @@
 
       nextEl.classList.add("enter");
 
-
-      /*
-        Changes:
-
-        Belong.
-        to
-        Belongs.
-
-        on the Disability frame.
-      */
 
       endingEl.textContent =
         nextFrame.ending;
@@ -548,11 +507,6 @@
         return;
       }
 
-
-      /*
-        Each message remains visible
-        for roughly 3.2 seconds.
-      */
 
       timer =
         setInterval(
@@ -621,15 +575,14 @@
         if (!paused) {
 
           startLoop();
-
         }
       }
     }
 
 
     if (
-      typeof reduceMotion.addEventListener
-      === "function"
+      typeof reduceMotion.addEventListener ===
+      "function"
     ) {
 
       reduceMotion.addEventListener(
@@ -638,8 +591,8 @@
       );
 
     } else if (
-      typeof reduceMotion.addListener
-      === "function"
+      typeof reduceMotion.addListener ===
+      "function"
     ) {
 
       reduceMotion.addListener(
@@ -650,11 +603,6 @@
 
     renderCurrentFrame();
 
-
-    /*
-      Someone who has Reduced Motion
-      enabled receives a static version.
-    */
 
     if (reduceMotion.matches) {
 
