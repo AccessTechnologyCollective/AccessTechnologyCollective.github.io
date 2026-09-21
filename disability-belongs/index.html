@@ -47,6 +47,11 @@
       overflow: hidden;
     }
 
+
+    /* =================================
+       BANNER
+    ================================= */
+
     .banner {
       width: 100%;
       min-height: 100vh;
@@ -61,9 +66,15 @@
       text-align: center;
     }
 
-    /* -----------------------------
-       MAIN MESSAGE
-    ----------------------------- */
+
+    /* =================================
+       FIXED TAGLINE SPINE
+
+             Be.
+             Belong.
+             Become.
+
+    ================================= */
 
     .message {
       position: relative;
@@ -76,38 +87,6 @@
       margin: 0 auto;
 
       gap: 10px;
-
-      opacity: 1;
-      transform: translateY(0);
-
-      transition:
-        opacity 0.45s ease,
-        transform 0.45s ease;
-    }
-
-    .message.fade-out {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-
-    .message.hidden {
-      display: none;
-    }
-
-    .message.fade-in {
-      animation: messageFadeIn 0.45s ease forwards;
-    }
-
-    @keyframes messageFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .line {
@@ -133,9 +112,10 @@
       color: var(--white);
     }
 
-    /* -----------------------------
+
+    /* =================================
        BELONG
-    ----------------------------- */
+    ================================= */
 
     .line-middle {
       position: relative;
@@ -145,23 +125,56 @@
       display: inline-flex;
       align-items: baseline;
 
-      color: var(--blue);
-
       white-space: nowrap;
-    }
 
-    .blue,
-    .ending {
       color: var(--blue);
     }
 
-    .ending {
-      display: inline;
+    .blue {
+      color: var(--blue);
     }
 
-    /* -----------------------------
+    .suffix {
+      color: var(--blue);
+    }
+
+    /*
+      Normally this is just the blue period.
+
+      On the final frame it becomes:
+      " at SDCCD."
+    */
+
+    .tail {
+      color: var(--blue);
+
+      font-size: 1em;
+
+      transition:
+        color 0.3s ease,
+        font-size 0.3s ease,
+        opacity 0.3s ease;
+    }
+
+    .tail.final-tail {
+      color: var(--white);
+
+      /*
+        Slightly smaller so the long final
+        statement remains balanced.
+      */
+      font-size: 0.55em;
+
+      margin-left: 0.25em;
+
+      letter-spacing: 0;
+    }
+
+
+    /* =================================
        ROTATING SUBJECT
-    ----------------------------- */
+       I / You / We / Disability
+    ================================= */
 
     .subject-wrap {
       position: absolute;
@@ -220,67 +233,14 @@
         transform 0.35s ease;
     }
 
-    /* -----------------------------
-       FINAL TITLE
-    ----------------------------- */
 
-    .final-title {
-      display: none;
-
-      width: 100%;
-
-      align-items: baseline;
-      justify-content: center;
-      flex-wrap: wrap;
-
-      gap: 0.22em;
-
-      padding: 0 12px;
-
-      font-size: var(--main-size);
-      line-height: 1.1;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-
-      text-align: center;
-
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    .final-title.show {
-      display: flex;
-
-      animation:
-        finalTitleIn 0.5s ease forwards;
-    }
-
-    .final-white {
-      color: var(--white);
-    }
-
-    .final-blue {
-      color: var(--blue);
-    }
-
-    @keyframes finalTitleIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* -----------------------------
+    /* =================================
        CONTROLS
-    ----------------------------- */
+    ================================= */
 
     .controls {
       margin-top: 24px;
+
       text-align: center;
     }
 
@@ -289,7 +249,7 @@
 
       padding: 8px 18px;
 
-      border: 1px solid rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(255,255,255,0.45);
       border-radius: 999px;
 
       background: transparent;
@@ -311,9 +271,10 @@
       outline-offset: 3px;
     }
 
-    /* -----------------------------
+
+    /* =================================
        SCREEN READER TEXT
-    ----------------------------- */
+    ================================= */
 
     .sr-only {
       position: absolute;
@@ -334,9 +295,10 @@
       border: 0;
     }
 
-    /* -----------------------------
-       RESPONSIVE
-    ----------------------------- */
+
+    /* =================================
+       TABLET / MOBILE
+    ================================= */
 
     @media (max-width: 700px) {
 
@@ -357,11 +319,12 @@
         margin-top: 16px;
       }
 
-      .final-title {
-        font-size: clamp(28px, 7vw, 40px);
-        padding: 0 8px;
+      .tail.final-tail {
+        font-size: 0.5em;
+        margin-left: 0.22em;
       }
     }
+
 
     @media (max-width: 430px) {
 
@@ -379,23 +342,22 @@
         padding-right: 8px;
       }
 
-      .final-title {
-        font-size: clamp(24px, 6.8vw, 32px);
-        gap: 0.16em;
+      .tail.final-tail {
+        font-size: 0.48em;
+        margin-left: 0.2em;
       }
     }
 
-    /* -----------------------------
+
+    /* =================================
        REDUCED MOTION
-    ----------------------------- */
+    ================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
       .subject,
-      .message,
-      .final-title {
+      .tail {
         transition: none !important;
-        animation: none !important;
         transform: none !important;
       }
 
@@ -412,49 +374,95 @@
 
   <main class="banner">
 
+
+    <!--
+      Static equivalent for assistive technology.
+      The animated visual itself is hidden from
+      screen readers so changing text is not
+      repeatedly announced.
+    -->
+
     <p class="sr-only">
-      Be. Belong. Become. I belong. You belong. We belong.
+      Be. Belong. Become.
+      I belong.
+      You belong.
+      We belong.
       Disability Belongs at SDCCD.
     </p>
 
 
-    <div class="message" aria-hidden="true">
+    <div
+      class="message"
+      aria-hidden="true"
+    >
+
+
+      <!-- BE -->
 
       <div class="line line-top">
-        <span class="brand static-word">Be.</span>
+
+        <span class="brand static-word">
+          Be.
+        </span>
+
       </div>
 
+
+      <!--
+        ROTATING SUBJECT + FIXED BELONG
+      -->
 
       <div class="line line-middle">
 
+
         <span class="subject-wrap">
-          <span class="subject current">I</span>
+
+          <span class="subject current">
+            I
+          </span>
+
           <span class="subject next"></span>
+
         </span>
+
 
         <span class="belong-wrap">
-          <span class="blue">Belong</span><span
-            id="ending"
-            class="ending"
+
+          <span class="blue">
+            Belong
+          </span>
+
+          <span
+            id="suffix"
+            class="suffix"
+          ></span>
+
+          <span
+            id="tail"
+            class="tail"
           >.</span>
+
+        </span>
+
+
+      </div>
+
+
+      <!-- BECOME -->
+
+      <div class="line line-bottom">
+
+        <span class="brand static-word">
+          Become.
         </span>
 
       </div>
 
 
-      <div class="line line-bottom">
-        <span class="brand static-word">Become.</span>
-      </div>
-
     </div>
 
 
-    <div class="final-title" aria-hidden="true">
-      <span class="final-white">Disability</span>
-      <span class="final-blue">Belongs</span>
-      <span class="final-white">at SDCCD.</span>
-    </div>
-
+    <!-- PAUSE / PLAY -->
 
     <div class="controls">
 
@@ -468,24 +476,51 @@
 
     </div>
 
+
   </main>
 
 
   <script>
 
+    /*
+      Animation sequence:
+
+      I Belong.
+      You Belong.
+      We Belong.
+      Disability Belongs at SDCCD.
+    */
+
     const frames = [
+
       {
         subject: "I",
-        ending: "."
+        suffix: "",
+        tail: ".",
+        final: false
       },
+
       {
         subject: "You",
-        ending: "."
+        suffix: "",
+        tail: ".",
+        final: false
       },
+
       {
         subject: "We",
-        ending: "."
+        suffix: "",
+        tail: ".",
+        final: false
+      },
+
+      {
+        subject: "Disability",
+        suffix: "s",
+        tail: "at SDCCD.",
+        final: true
       }
+
     ];
 
 
@@ -495,17 +530,15 @@
     const nextEl =
       document.querySelector(".subject.next");
 
-    const endingEl =
-      document.querySelector("#ending");
+    const suffixEl =
+      document.querySelector("#suffix");
+
+    const tailEl =
+      document.querySelector("#tail");
 
     const pauseBtn =
       document.querySelector(".pause-btn");
 
-    const messageEl =
-      document.querySelector(".message");
-
-    const finalTitleEl =
-      document.querySelector(".final-title");
 
     const reduceMotion =
       window.matchMedia(
@@ -514,29 +547,74 @@
 
 
     let currentIndex = 0;
-    let timer = null;
-    let paused = false;
-    let animating = false;
-    let showingFinal = false;
 
+    let timer = null;
+
+    let paused = false;
+
+    let animating = false;
+
+
+    /*
+      Render suffix + ending
+    */
+
+    function renderEnding(frame) {
+
+      suffixEl.textContent =
+        frame.suffix;
+
+
+      tailEl.textContent =
+        frame.tail;
+
+
+      if (frame.final) {
+
+        tailEl.classList.add(
+          "final-tail"
+        );
+
+      } else {
+
+        tailEl.classList.remove(
+          "final-tail"
+        );
+      }
+    }
+
+
+    /*
+      Initial state
+    */
 
     function renderCurrentFrame() {
 
-      const frame = frames[currentIndex];
+      const frame =
+        frames[currentIndex];
+
 
       currentEl.textContent =
         frame.subject;
 
-      endingEl.textContent =
-        frame.ending;
+
+      renderEnding(frame);
     }
 
 
+    /*
+      Animate to next subject
+    */
+
     function animateTo(nextIndex) {
 
-      if (animating) return;
+      if (animating) {
+        return;
+      }
+
 
       animating = true;
+
 
       const nextFrame =
         frames[nextIndex];
@@ -545,32 +623,56 @@
       nextEl.textContent =
         nextFrame.subject;
 
+
       nextEl.className =
         "subject next";
 
 
+      /*
+        Force browser to establish
+        starting animation position.
+      */
+
       void nextEl.offsetWidth;
 
 
-      currentEl.classList.add("exit");
+      currentEl.classList.add(
+        "exit"
+      );
 
-      nextEl.classList.add("enter");
+
+      nextEl.classList.add(
+        "enter"
+      );
 
 
-      endingEl.textContent =
-        nextFrame.ending;
+      /*
+        Update:
+
+        Belong.
+        or
+        Belongs at SDCCD.
+      */
+
+      renderEnding(
+        nextFrame
+      );
 
 
       setTimeout(() => {
 
+
         currentEl.textContent =
           nextFrame.subject;
+
 
         currentEl.className =
           "subject current";
 
 
-        nextEl.textContent = "";
+        nextEl.textContent =
+          "";
+
 
         nextEl.className =
           "subject next";
@@ -579,89 +681,39 @@
         currentIndex =
           nextIndex;
 
+
         animating =
           false;
+
 
       }, 500);
     }
 
 
-    function showFinalTitle() {
+    /*
+      Advance sequence
+    */
 
-      if (animating) return;
+    function advanceFrame() {
 
-      animating = true;
-      showingFinal = true;
-
-
-      messageEl.classList.add("fade-out");
+      const nextIndex =
+        (currentIndex + 1)
+        % frames.length;
 
 
-      setTimeout(() => {
-
-        messageEl.classList.add("hidden");
-
-        finalTitleEl.classList.add("show");
-
-        animating = false;
-
-      }, 450);
+      animateTo(
+        nextIndex
+      );
     }
 
 
-    function returnToBeginning() {
+    /*
+      Begin loop
 
-      if (animating) return;
-
-      animating = true;
-
-
-      finalTitleEl.classList.remove("show");
-
-
-      setTimeout(() => {
-
-        currentIndex = 0;
-
-        currentEl.textContent =
-          frames[0].subject;
-
-        currentEl.className =
-          "subject current";
-
-        nextEl.textContent = "";
-
-        nextEl.className =
-          "subject next";
-
-        endingEl.textContent =
-          frames[0].ending;
-
-
-        messageEl.classList.remove(
-          "hidden",
-          "fade-out"
-        );
-
-
-        void messageEl.offsetWidth;
-
-
-        messageEl.classList.add("fade-in");
-
-
-        setTimeout(() => {
-
-          messageEl.classList.remove("fade-in");
-
-          showingFinal = false;
-          animating = false;
-
-        }, 450);
-
-      }, 450);
-    }
-
+      Last frame stays visible slightly
+      longer because it contains the
+      training title.
+    */
 
     function scheduleNext() {
 
@@ -672,59 +724,46 @@
         paused ||
         reduceMotion.matches
       ) {
+
         return;
       }
 
 
+      const currentFrame =
+        frames[currentIndex];
+
+
       const delay =
-        showingFinal
-          ? 5000
+        currentFrame.final
+          ? 4500
           : 3200;
 
 
-      timer = setTimeout(() => {
+      timer =
+        setTimeout(
+          () => {
 
+            advanceFrame();
 
-        if (showingFinal) {
+            /*
+              Allow transition to finish
+              before scheduling next frame.
+            */
 
-          returnToBeginning();
+            setTimeout(
+              scheduleNext,
+              550
+            );
 
-          setTimeout(
-            scheduleNext,
-            600
-          );
-
-          return;
-        }
-
-
-        if (
-          currentIndex <
-          frames.length - 1
-        ) {
-
-          animateTo(
-            currentIndex + 1
-          );
-
-          setTimeout(
-            scheduleNext,
-            600
-          );
-
-        } else {
-
-          showFinalTitle();
-
-          setTimeout(
-            scheduleNext,
-            600
-          );
-        }
-
-      }, delay);
+          },
+          delay
+        );
     }
 
+
+    /*
+      Stop timer
+    */
 
     function stopLoop() {
 
@@ -737,11 +776,17 @@
     }
 
 
+    /*
+      Pause / play
+    */
+
     pauseBtn.addEventListener(
       "click",
       () => {
 
-        paused = !paused;
+
+        paused =
+          !paused;
 
 
         pauseBtn.setAttribute(
@@ -764,44 +809,71 @@
 
           scheduleNext();
         }
+
       }
     );
 
 
-    function handleReducedMotion(event) {
+    /*
+      Reduced-motion preference
+    */
+
+    function handleReducedMotion(
+      event
+    ) {
 
       if (event.matches) {
 
+
         stopLoop();
 
-        messageEl.classList.add("hidden");
 
-        finalTitleEl.classList.add("show");
+        /*
+          Show the complete training
+          title as the static state.
+        */
 
-        pauseBtn.hidden = true;
+        currentIndex =
+          frames.length - 1;
+
+
+        currentEl.textContent =
+          frames[currentIndex].subject;
+
+
+        renderEnding(
+          frames[currentIndex]
+        );
+
+
+        pauseBtn.hidden =
+          true;
+
 
       } else {
 
-        finalTitleEl.classList.remove("show");
-
-        messageEl.classList.remove(
-          "hidden",
-          "fade-out"
-        );
 
         currentIndex = 0;
 
-        renderCurrentFrame();
 
-        showingFinal = false;
+        currentEl.textContent =
+          frames[0].subject;
 
-        pauseBtn.hidden = false;
+
+        renderEnding(
+          frames[0]
+        );
+
+
+        pauseBtn.hidden =
+          false;
 
 
         if (!paused) {
 
           scheduleNext();
         }
+
       }
     }
 
@@ -827,20 +899,40 @@
     }
 
 
+    /*
+      Start
+    */
+
     renderCurrentFrame();
 
 
-    if (reduceMotion.matches) {
+    if (
+      reduceMotion.matches
+    ) {
 
-      messageEl.classList.add("hidden");
 
-      finalTitleEl.classList.add("show");
+      currentIndex =
+        frames.length - 1;
 
-      pauseBtn.hidden = true;
+
+      currentEl.textContent =
+        frames[currentIndex].subject;
+
+
+      renderEnding(
+        frames[currentIndex]
+      );
+
+
+      pauseBtn.hidden =
+        true;
+
 
     } else {
 
+
       scheduleNext();
+
     }
 
   </script>
