@@ -143,6 +143,18 @@
       display: inline;
     }
 
+    /*
+      Final frame only:
+      Disability Belongs.
+      becomes entirely blue.
+    */
+
+    .belong-wrap.final-blue,
+    .belong-wrap.final-blue .belong-word,
+    .belong-wrap.final-blue .ending {
+      color: var(--blue);
+    }
+
 
     /* =================================
        ROTATING SUBJECT
@@ -291,12 +303,12 @@
       z-index: 2;
     }
 
-   .district-logo img {
-  display: block;
-  width: 155px;
-  max-width: 32vw;
-  height: auto;
-}
+    .district-logo img {
+      display: block;
+      width: 155px;
+      max-width: 32vw;
+      height: auto;
+    }
 
 
     /* =================================
@@ -561,7 +573,7 @@
     <div class="district-logo">
 
       <img
-        src="images/sdccd-logo-db.png"
+        src="images/sdccd-logo-db.png?v=2"
         alt="San Diego Community College District"
       >
 
@@ -622,6 +634,11 @@
         "#ending"
       );
 
+    const belongWrap =
+      document.querySelector(
+        ".belong-wrap"
+      );
+
     const pauseBtn =
       document.querySelector(
         "#pauseButton"
@@ -659,6 +676,23 @@
 
       endingEl.textContent =
         frame.ending;
+
+
+      if (
+        currentIndex ===
+        frames.length - 1
+      ) {
+
+        belongWrap.classList.add(
+          "final-blue"
+        );
+
+      } else {
+
+        belongWrap.classList.remove(
+          "final-blue"
+        );
+      }
     }
 
 
@@ -715,6 +749,29 @@
 
       endingEl.textContent =
         nextFrame.ending;
+
+
+      /*
+        On the final frame,
+        make Belongs. blue so the complete
+        phrase Disability Belongs. is blue.
+      */
+
+      if (
+        nextIndex ===
+        frames.length - 1
+      ) {
+
+        belongWrap.classList.add(
+          "final-blue"
+        );
+
+      } else {
+
+        belongWrap.classList.remove(
+          "final-blue"
+        );
+      }
 
 
       setTimeout(() => {
@@ -874,6 +931,11 @@
 
       endingEl.textContent =
         frames[currentIndex].ending;
+
+
+      belongWrap.classList.add(
+        "final-blue"
+      );
     }
 
 
@@ -900,6 +962,11 @@
 
       endingEl.textContent =
         frames[0].ending;
+
+
+      belongWrap.classList.remove(
+        "final-blue"
+      );
     }
 
 
