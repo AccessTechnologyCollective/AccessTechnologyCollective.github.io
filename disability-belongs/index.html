@@ -17,10 +17,7 @@
       --blue: #31A9E0;
       --white: #FFFFFF;
 
-      /* Same size for Be / Belong / Become */
       --main-size: clamp(38px, 5vw, 58px);
-
-      /* Space between rotating word and Belong */
       --subject-gap: 18px;
     }
 
@@ -50,10 +47,6 @@
       overflow: hidden;
     }
 
-    /* ---------------------------------
-       FULL BANNER
-    ---------------------------------- */
-
     .banner {
       width: 100%;
       min-height: 100vh;
@@ -63,19 +56,14 @@
       align-items: center;
       justify-content: center;
 
-      padding: 28px 24px 18px;
+      padding: 24px 24px 16px;
 
       text-align: center;
     }
 
-    /* ---------------------------------
-       FIXED BRAND SPINE
-
-             Be.
-             Belong.
-             Become.
-
-    ---------------------------------- */
+    /* -----------------------------
+       MAIN MESSAGE
+    ----------------------------- */
 
     .message {
       position: relative;
@@ -88,6 +76,38 @@
       margin: 0 auto;
 
       gap: 10px;
+
+      opacity: 1;
+      transform: translateY(0);
+
+      transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+    }
+
+    .message.fade-out {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    .message.hidden {
+      display: none;
+    }
+
+    .message.fade-in {
+      animation: messageFadeIn 0.45s ease forwards;
+    }
+
+    @keyframes messageFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .line {
@@ -101,11 +121,6 @@
       text-align: left;
     }
 
-    /*
-      Be, Belong and Become all use
-      the exact same font size.
-    */
-
     .brand,
     .belong-wrap {
       font-size: var(--main-size);
@@ -118,9 +133,9 @@
       color: var(--white);
     }
 
-    /* ---------------------------------
+    /* -----------------------------
        BELONG
-    ---------------------------------- */
+    ----------------------------- */
 
     .line-middle {
       position: relative;
@@ -144,13 +159,9 @@
       display: inline;
     }
 
-    /* ---------------------------------
+    /* -----------------------------
        ROTATING SUBJECT
-
-       Positioned independently so
-       I / You / We / Disability never
-       move the Be-Belong-Become spine.
-    ---------------------------------- */
+    ----------------------------- */
 
     .subject-wrap {
       position: absolute;
@@ -209,12 +220,67 @@
         transform 0.35s ease;
     }
 
-    /* ---------------------------------
-       PAUSE / PLAY
-    ---------------------------------- */
+    /* -----------------------------
+       FINAL TITLE
+    ----------------------------- */
+
+    .final-title {
+      display: none;
+
+      width: 100%;
+
+      align-items: baseline;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      gap: 0.22em;
+
+      padding: 0 12px;
+
+      font-size: var(--main-size);
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+
+      text-align: center;
+
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .final-title.show {
+      display: flex;
+
+      animation:
+        finalTitleIn 0.5s ease forwards;
+    }
+
+    .final-white {
+      color: var(--white);
+    }
+
+    .final-blue {
+      color: var(--blue);
+    }
+
+    @keyframes finalTitleIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* -----------------------------
+       CONTROLS
+    ----------------------------- */
 
     .controls {
-      margin-top: 26px;
+      margin-top: 24px;
       text-align: center;
     }
 
@@ -245,9 +311,9 @@
       outline-offset: 3px;
     }
 
-    /* ---------------------------------
+    /* -----------------------------
        SCREEN READER TEXT
-    ---------------------------------- */
+    ----------------------------- */
 
     .sr-only {
       position: absolute;
@@ -268,54 +334,68 @@
       border: 0;
     }
 
-    /* ---------------------------------
+    /* -----------------------------
        RESPONSIVE
-    ---------------------------------- */
+    ----------------------------- */
 
     @media (max-width: 700px) {
 
-  :root {
-    --main-size: clamp(28px, 7vw, 40px);
-    --subject-gap: 8px;
-  }
+      :root {
+        --main-size: clamp(28px, 7vw, 40px);
+        --subject-gap: 8px;
+      }
 
-  .subject-wrap {
-    width: 9ch;
-  }
+      .subject-wrap {
+        width: 9ch;
+      }
 
-  .banner {
-    padding: 18px 12px 12px;
-  }
+      .banner {
+        padding: 18px 12px 12px;
+      }
 
-  .controls {
-    margin-top: 16px;
-  }
-}
+      .controls {
+        margin-top: 16px;
+      }
 
-@media (max-width: 430px) {
+      .final-title {
+        font-size: clamp(28px, 7vw, 40px);
+        padding: 0 8px;
+      }
+    }
 
-  :root {
-    --main-size: clamp(26px, 7.5vw, 34px);
-    --subject-gap: 6px;
-  }
+    @media (max-width: 430px) {
 
-  .subject-wrap {
-    width: 8.5ch;
-  }
+      :root {
+        --main-size: clamp(26px, 7.5vw, 34px);
+        --subject-gap: 6px;
+      }
 
-  .banner {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-}
-    /* ---------------------------------
+      .subject-wrap {
+        width: 8.5ch;
+      }
+
+      .banner {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .final-title {
+        font-size: clamp(24px, 6.8vw, 32px);
+        gap: 0.16em;
+      }
+    }
+
+    /* -----------------------------
        REDUCED MOTION
-    ---------------------------------- */
+    ----------------------------- */
 
     @media (prefers-reduced-motion: reduce) {
 
-      .subject {
+      .subject,
+      .message,
+      .final-title {
         transition: none !important;
+        animation: none !important;
         transform: none !important;
       }
 
@@ -332,27 +412,19 @@
 
   <main class="banner">
 
-    <!--
-      Full static equivalent for screen readers.
-      The animated visual below is hidden from
-      assistive technology to avoid repeatedly
-      announcing changing text.
-    -->
-
     <p class="sr-only">
-      Be. Belong. Become. I belong. You belong. We belong. Disability belongs.
+      Be. Belong. Become. I belong. You belong. We belong.
+      Disability Belongs at SDCCD.
     </p>
 
 
     <div class="message" aria-hidden="true">
 
-      <!-- BE -->
       <div class="line line-top">
         <span class="brand static-word">Be.</span>
       </div>
 
 
-      <!-- ROTATING SUBJECT + BELONG -->
       <div class="line line-middle">
 
         <span class="subject-wrap">
@@ -370,11 +442,17 @@
       </div>
 
 
-      <!-- BECOME -->
       <div class="line line-bottom">
         <span class="brand static-word">Become.</span>
       </div>
 
+    </div>
+
+
+    <div class="final-title" aria-hidden="true">
+      <span class="final-white">Disability</span>
+      <span class="final-blue">Belongs</span>
+      <span class="final-white">at SDCCD.</span>
     </div>
 
 
@@ -395,15 +473,6 @@
 
   <script>
 
-    /*
-      Rotating messages
-
-      I Belong.
-      You Belong.
-      We Belong.
-      Disability Belongs.
-    */
-
     const frames = [
       {
         subject: "I",
@@ -416,10 +485,6 @@
       {
         subject: "We",
         ending: "."
-      },
-      {
-        subject: "Disability",
-        ending: "s."
       }
     ];
 
@@ -436,6 +501,12 @@
     const pauseBtn =
       document.querySelector(".pause-btn");
 
+    const messageEl =
+      document.querySelector(".message");
+
+    const finalTitleEl =
+      document.querySelector(".final-title");
+
     const reduceMotion =
       window.matchMedia(
         "(prefers-reduced-motion: reduce)"
@@ -446,6 +517,7 @@
     let timer = null;
     let paused = false;
     let animating = false;
+    let showingFinal = false;
 
 
     function renderCurrentFrame() {
@@ -477,11 +549,6 @@
         "subject next";
 
 
-      /*
-        Forces the browser to recognize
-        the initial animation position.
-      */
-
       void nextEl.offsetWidth;
 
 
@@ -489,16 +556,6 @@
 
       nextEl.classList.add("enter");
 
-
-      /*
-        Changes:
-
-        Belong.
-        to
-        Belongs.
-
-        on the Disability frame.
-      */
 
       endingEl.textContent =
         nextFrame.ending;
@@ -529,18 +586,87 @@
     }
 
 
-    function advanceFrame() {
+    function showFinalTitle() {
 
-      const nextIndex =
-        (currentIndex + 1) % frames.length;
+      if (animating) return;
 
-      animateTo(nextIndex);
+      animating = true;
+      showingFinal = true;
+
+
+      messageEl.classList.add("fade-out");
+
+
+      setTimeout(() => {
+
+        messageEl.classList.add("hidden");
+
+        finalTitleEl.classList.add("show");
+
+        animating = false;
+
+      }, 450);
     }
 
 
-    function startLoop() {
+    function returnToBeginning() {
+
+      if (animating) return;
+
+      animating = true;
+
+
+      finalTitleEl.classList.remove("show");
+
+
+      setTimeout(() => {
+
+        currentIndex = 0;
+
+        currentEl.textContent =
+          frames[0].subject;
+
+        currentEl.className =
+          "subject current";
+
+        nextEl.textContent = "";
+
+        nextEl.className =
+          "subject next";
+
+        endingEl.textContent =
+          frames[0].ending;
+
+
+        messageEl.classList.remove(
+          "hidden",
+          "fade-out"
+        );
+
+
+        void messageEl.offsetWidth;
+
+
+        messageEl.classList.add("fade-in");
+
+
+        setTimeout(() => {
+
+          messageEl.classList.remove("fade-in");
+
+          showingFinal = false;
+          animating = false;
+
+        }, 450);
+
+      }, 450);
+    }
+
+
+    function scheduleNext() {
 
       stopLoop();
+
 
       if (
         paused ||
@@ -550,16 +676,53 @@
       }
 
 
-      /*
-        Each message remains visible
-        for roughly 3.2 seconds.
-      */
+      const delay =
+        showingFinal
+          ? 5000
+          : 3200;
 
-      timer =
-        setInterval(
-          advanceFrame,
-          3200
-        );
+
+      timer = setTimeout(() => {
+
+
+        if (showingFinal) {
+
+          returnToBeginning();
+
+          setTimeout(
+            scheduleNext,
+            600
+          );
+
+          return;
+        }
+
+
+        if (
+          currentIndex <
+          frames.length - 1
+        ) {
+
+          animateTo(
+            currentIndex + 1
+          );
+
+          setTimeout(
+            scheduleNext,
+            600
+          );
+
+        } else {
+
+          showFinalTitle();
+
+          setTimeout(
+            scheduleNext,
+            600
+          );
+        }
+
+      }, delay);
     }
 
 
@@ -567,7 +730,7 @@
 
       if (timer !== null) {
 
-        clearInterval(timer);
+        clearTimeout(timer);
 
         timer = null;
       }
@@ -599,8 +762,7 @@
 
         } else {
 
-          startLoop();
-
+          scheduleNext();
         }
       }
     );
@@ -612,17 +774,33 @@
 
         stopLoop();
 
+        messageEl.classList.add("hidden");
+
+        finalTitleEl.classList.add("show");
+
         pauseBtn.hidden = true;
 
       } else {
+
+        finalTitleEl.classList.remove("show");
+
+        messageEl.classList.remove(
+          "hidden",
+          "fade-out"
+        );
+
+        currentIndex = 0;
+
+        renderCurrentFrame();
+
+        showingFinal = false;
 
         pauseBtn.hidden = false;
 
 
         if (!paused) {
 
-          startLoop();
-
+          scheduleNext();
         }
       }
     }
@@ -652,18 +830,17 @@
     renderCurrentFrame();
 
 
-    /*
-      Someone who has Reduced Motion
-      enabled receives a static version.
-    */
-
     if (reduceMotion.matches) {
+
+      messageEl.classList.add("hidden");
+
+      finalTitleEl.classList.add("show");
 
       pauseBtn.hidden = true;
 
     } else {
 
-      startLoop();
+      scheduleNext();
     }
 
   </script>
