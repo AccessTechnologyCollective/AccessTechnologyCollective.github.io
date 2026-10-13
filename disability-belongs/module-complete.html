@@ -1,24 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Module Complete</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <title>Course Complete | Disability Belongs at SDCCD</title>
 
   <style>
     :root {
       --background: #222222;
-      --white: #FFFFFF;
-      --text-secondary: #E5E7EB;
-
-      /* Default theme */
-      --accent: #A0D4EE;
+      --text: #ffffff;
+      --azure: #31A9E0;
+      --light-azure: #6FC5EC;
+      --pale-azure: #A0D4EE;
+      --red: #BE1E2D;
+      --light-red: #E87681;
+      --dark-blue: #0054A4;
+      --blue: #2478BE;
+      --teal: #1E9097;
+      --light-teal: #83D0D4;
+      --purple: #5F3688;
+      --light-purple: #B99AD2;
     }
 
     * {
@@ -27,785 +30,373 @@
 
     html,
     body {
-      width: 100%;
-      height: 100%;
+      min-height: 100%;
       margin: 0;
-      padding: 0;
-
-      background: var(--background);
     }
 
     body {
-      overflow: hidden;
-
-      color: var(--white);
-
-      font-family:
-        "URW DIN",
-        Arial,
-        Helvetica,
-        sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-
-    /* =========================================
-       CELEBRATION AREA
-    ========================================= */
-
-    .celebration {
+    .celebration-page {
       position: relative;
-
-      width: 100%;
-      height: 100vh;
-      min-height: 150px;
-
       display: flex;
+      min-height: 100vh;
       align-items: center;
       justify-content: center;
-
-      overflow: hidden;
-
-      background: var(--background);
+      padding: 48px 24px 90px;
+      isolation: isolate;
     }
 
-
-    /* =========================================
-       MESSAGE
-    ========================================= */
-
-    .message {
+    .celebration-content {
       position: relative;
-
       z-index: 2;
-
       width: 100%;
-      max-width: 700px;
-
-      padding: 18px 24px;
-
+      max-width: 760px;
       text-align: center;
     }
 
-    .checkmark {
-      width: 54px;
-      height: 54px;
-
-      margin: 0 auto 13px;
-
+    .completion-icon {
       display: flex;
+      width: 100px;
+      height: 100px;
       align-items: center;
       justify-content: center;
-
-      border: 3px solid var(--accent);
-
+      margin: 0 auto 28px;
+      border: 4px solid #31A9E0;
       border-radius: 50%;
-
-      color: var(--accent);
-
-      font-size: 30px;
+      color: #ffffff;
+      font-size: 56px;
       font-weight: 700;
-
       line-height: 1;
+      box-shadow:
+        0 0 0 8px rgba(49, 169, 224, 0.12),
+        0 0 28px rgba(49, 169, 224, 0.25);
     }
 
-    .message h1 {
+    h1 {
+      margin: 0 0 18px;
+      color: #ffffff;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+    }
+
+    .subtitle {
       margin: 0;
-
-      color: var(--white);
-
-      font-size:
-        clamp(28px, 5vw, 42px);
-
-      font-weight: 600;
-
-      line-height: 1.2;
-
-      letter-spacing: 0.01em;
+      color: #6FC5EC;
+      font-size: clamp(1.25rem, 3vw, 1.8rem);
+      font-weight: 700;
+      line-height: 1.4;
     }
 
-    .message p {
-      margin: 9px 0 0;
-
-      color: var(--accent);
-
-      font-size:
-        clamp(15px, 2vw, 19px);
-
-      font-weight: 600;
-
-      line-height: 1.45;
-
-      letter-spacing: 0.025em;
+    .message {
+      max-width: 580px;
+      margin: 24px auto 0;
+      color: #f2f2f2;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.7;
     }
 
-
-    /* =========================================
-       CONFETTI CANVAS
-    ========================================= */
-
-    #confetti {
-      position: absolute;
-
-      inset: 0;
-
-      display: block;
-
-      width: 100%;
-      height: 100%;
-
-      pointer-events: none;
-
+    .stars {
+      position: fixed;
       z-index: 1;
-    }
-
-
-    /* =========================================
-       CONFETTI-ONLY MODE
-
-       Canvas can use:
-       ?theme=purple&mode=confetti
-
-       The dark background remains, but all
-       duplicate completion text disappears.
-    ========================================= */
-
-    body.confetti-only .message {
-      display: none;
-    }
-
-
-    /* =========================================
-       SCREEN-READER-ONLY CONTENT
-    ========================================= */
-
-    .sr-only {
-      position: absolute;
-
-      width: 1px;
-      height: 1px;
-
-      padding: 0;
-      margin: -1px;
-
+      inset: 0;
       overflow: hidden;
-
-      clip: rect(0, 0, 0, 0);
-      clip-path: inset(50%);
-
-      white-space: nowrap;
-
-      border: 0;
+      pointer-events: none;
     }
 
+    .star {
+      position: absolute;
+      top: -60px;
+      left: var(--left);
+      display: block;
+      color: var(--color);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: var(--size);
+      font-weight: 900;
+      line-height: 1;
+      opacity: 0;
+      transform: rotate(var(--rotation));
+      text-shadow:
+        0 0 1px #ffffff,
+        0 0 4px currentColor,
+        0 0 10px currentColor;
+      -webkit-text-stroke: 0.25px currentColor;
+      will-change: transform, opacity;
+    }
 
-    /* =========================================
-       MOBILE
-    ========================================= */
+    .stars.celebrating .star {
+      animation:
+        star-fall var(--duration) linear var(--delay) 1 both;
+    }
 
-    @media (max-width: 500px) {
+    @keyframes star-fall {
+      0% {
+        transform: translate3d(0, -10px, 0)
+                   rotate(var(--rotation))
+                   scale(0.65);
+        opacity: 0;
+      }
 
-      .celebration {
-        min-height: 130px;
+      8% {
+        opacity: 1;
+      }
+
+      20% {
+        transform: translate3d(
+          calc(var(--drift) * 0.15),
+          15vh,
+          0
+        ) rotate(calc(var(--rotation) + 75deg)) scale(1);
+        opacity: 1;
+      }
+
+      55% {
+        transform: translate3d(
+          calc(var(--drift) * 0.6),
+          55vh,
+          0
+        ) rotate(calc(var(--rotation) + 220deg)) scale(0.95);
+        opacity: 1;
+      }
+
+      85% {
+        opacity: 0.9;
+      }
+
+      100% {
+        transform: translate3d(
+          var(--drift),
+          115vh,
+          0
+        ) rotate(calc(var(--rotation) + 360deg)) scale(0.8);
+        opacity: 0;
+      }
+    }
+
+    .celebrate-button {
+      position: fixed;
+      z-index: 5;
+      bottom: 22px;
+      left: 22px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 12px 20px;
+      border: 2px solid #6FC5EC;
+      border-radius: 8px;
+      background: #222222;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+      transition:
+        background-color 160ms ease,
+        color 160ms ease,
+        box-shadow 160ms ease;
+    }
+
+    .celebrate-button.visible {
+      display: inline-flex;
+    }
+
+    .celebrate-button:hover {
+      background: #31A9E0;
+      color: #111111;
+      box-shadow: 0 0 16px rgba(49, 169, 224, 0.35);
+    }
+
+    .celebrate-button:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .celebration-page {
+        padding: 36px 20px 100px;
+      }
+
+      .completion-icon {
+        width: 82px;
+        height: 82px;
+        margin-bottom: 24px;
+        font-size: 46px;
       }
 
       .message {
-        padding:
-          14px
-          16px;
+        margin-top: 20px;
       }
 
-      .checkmark {
-        width: 46px;
-        height: 46px;
-
-        margin-bottom: 10px;
-
-        font-size: 25px;
+      .celebrate-button {
+        bottom: 16px;
+        left: 16px;
       }
     }
-
-
-    /* =========================================
-       REDUCED MOTION
-
-       Motion-sensitive users receive
-       the static completed state.
-    ========================================= */
 
     @media (prefers-reduced-motion: reduce) {
+      .celebration-content {
+        animation: none;
+      }
 
-      #confetti {
+      .stars.celebrating .star {
+        animation: none;
         display: none;
       }
-    }
 
+      .celebrate-button {
+        transition: none;
+      }
+    }
   </style>
 </head>
 
-
 <body>
-
-  <main
-    class="celebration"
-    aria-label="Module completion celebration"
-  >
-
-    <!--
-      Static accessible equivalent.
-      The confetti itself is decorative.
-    -->
-
-    <p class="sr-only">
-      Module complete.
-    </p>
-
-
-    <!-- Decorative animation -->
-
-    <canvas
-      id="confetti"
-      aria-hidden="true"
-    ></canvas>
-
-
-    <!-- Optional visible completion message -->
-
+  <main class="celebration-page">
     <div
-      class="message"
+      class="stars"
+      id="stars"
       aria-hidden="true"
-    >
+    ></div>
 
-      <div class="checkmark">
+    <section
+      class="celebration-content"
+      aria-labelledby="completion-heading"
+    >
+      <div class="completion-icon" aria-hidden="true">
         ✓
       </div>
 
-      <h1>
-        Module Complete
-      </h1>
+      <h1 id="completion-heading">Course Complete!</h1>
 
-      <p id="accentText">
-        Nice work.
+      <p class="subtitle">
+        Disability Belongs at SDCCD
       </p>
 
-    </div>
+      <p class="message">
+        Thank you for being part of creating a more accessible,
+        inclusive, and welcoming community. Every step toward
+        accessibility helps everyone belong.
+      </p>
+    </section>
 
+    <button
+      class="celebrate-button"
+      id="celebrate-again"
+      type="button"
+    >
+      <span aria-hidden="true">★</span>
+      Celebrate Again!
+    </button>
   </main>
 
-
   <script>
+    (() => {
+      const starsContainer = document.getElementById("stars");
+      const celebrateButton = document.getElementById("celebrate-again");
+      const celebrationDuration = 8000;
 
-    /* =========================================
-       URL PARAMETERS
+      const colors = [
+        "#31A9E0",
+        "#6FC5EC",
+        "#A0D4EE",
+        "#D5EFFA",
+        "#FFFFFF",
+        "#BE1E2D",
+        "#D94A58",
+        "#E87681",
+        "#F29AA3",
+        "#0054A4",
+        "#2478BE",
+        "#79BCE8",
+        "#1E9097",
+        "#4DB2B8",
+        "#83D0D4",
+        "#5F3688",
+        "#7E57A5",
+        "#9B75BC",
+        "#B99AD2"
+      ];
 
-       Examples:
+      let celebrationTimer;
 
-       ?theme=purple
+      function createStar() {
+        const star = document.createElement("span");
 
-       ?theme=purple&mode=confetti
+        star.className = "star";
+        star.textContent = Math.random() > 0.22 ? "★" : "✦";
 
-       ?theme=purple&message=Module%201%20complete!
-    ========================================= */
+        const size = 20 + Math.random() * 24;
+        const left = Math.random() * 100;
+        const drift = (Math.random() - 0.5) * 180;
+        const duration = 4.5 + Math.random() * 3.5;
+        const delay = Math.random() * 2.5;
+        const rotation = Math.random() * 90 - 45;
+        const color = colors[Math.floor(Math.random() * colors.length)];
 
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
+        star.style.setProperty("--size", `${size}px`);
+        star.style.setProperty("--left", `${left}%`);
+        star.style.setProperty("--drift", `${drift}px`);
+        star.style.setProperty("--duration", `${duration}s`);
+        star.style.setProperty("--delay", `${delay}s`);
+        star.style.setProperty("--rotation", `${rotation}deg`);
+        star.style.setProperty("--color", color);
 
-
-    /* =========================================
-       COLOR THEMES
-
-       The accent values are intentionally
-       lighter than the core brand colors
-       so they remain readable on #222222.
-    ========================================= */
-
-    const themes = {
-
-
-      /* -----------------------------
-         DISTRICT AZURE
-      ----------------------------- */
-
-      azure: {
-
-        accent: "#A0D4EE",
-
-        confetti: [
-          "#31A9E0",
-          "#6FC5EC",
-          "#A0D4EE",
-          "#D5EFFA",
-          "#FFFFFF"
-        ]
-      },
-
-
-      /* -----------------------------
-         RED
-      ----------------------------- */
-
-      red: {
-
-        accent: "#F29AA3",
-
-        confetti: [
-          "#BE1E2D",
-          "#D94A58",
-          "#E87681",
-          "#F29AA3",
-          "#FFFFFF"
-        ]
-      },
-
-
-      /* -----------------------------
-         DARK BLUE
-      ----------------------------- */
-
-      darkblue: {
-
-        accent: "#79BCE8",
-
-        confetti: [
-          "#0054A4",
-          "#2478BE",
-          "#31A9E0",
-          "#79BCE8",
-          "#A0D4EE",
-          "#FFFFFF"
-        ]
-      },
-
-
-      /* -----------------------------
-         TEAL
-      ----------------------------- */
-
-      teal: {
-
-        accent: "#83D0D4",
-
-        confetti: [
-          "#1E9097",
-          "#4DB2B8",
-          "#83D0D4",
-          "#A9E2E5",
-          "#FFFFFF"
-        ]
-      },
-
-
-      /* -----------------------------
-         PURPLE
-         Module 1
-      ----------------------------- */
-
-      purple: {
-
-        /*
-          Core purple #5F3688 is still
-          included in the confetti, but
-          the text/accent uses the lighter
-          #B99AD2 for better contrast.
-        */
-
-        accent: "#B99AD2",
-
-        confetti: [
-          "#5F3688",
-          "#7E57A5",
-          "#9B75BC",
-          "#B99AD2",
-          "#D4BFE5",
-          "#31A9E0",
-          "#FFFFFF"
-        ]
-      },
-
-
-      /* -----------------------------
-         ALL DISTRICT COLORS
-      ----------------------------- */
-
-      multicolor: {
-
-        accent: "#A0D4EE",
-
-        confetti: [
-          "#31A9E0",
-          "#A0D4EE",
-          "#F29AA3",
-          "#79BCE8",
-          "#83D0D4",
-          "#B99AD2",
-          "#FFFFFF"
-        ]
+        return star;
       }
 
-    };
+      function startCelebration() {
+        window.clearTimeout(celebrationTimer);
 
+        starsContainer.classList.remove("celebrating");
+        starsContainer.replaceChildren();
 
-    /* =========================================
-       SELECT THEME
-    ========================================= */
+        celebrateButton.classList.remove("visible");
 
-    const themeName =
-      params.get("theme")
-      || "azure";
+        const reducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-
-    const theme =
-      themes[themeName]
-      || themes.azure;
-
-
-    document.documentElement
-      .style
-      .setProperty(
-        "--accent",
-        theme.accent
-      );
-
-
-    /* =========================================
-       CONFETTI-ONLY MODE
-    ========================================= */
-
-    const mode =
-      params.get("mode");
-
-
-    if (mode === "confetti") {
-
-      document.body
-        .classList.add(
-          "confetti-only"
-        );
-    }
-
-
-    /* =========================================
-       OPTIONAL CUSTOM MESSAGE
-
-       Not used when mode=confetti.
-    ========================================= */
-
-    const message =
-      params.get("message");
-
-
-    if (
-      message &&
-      mode !== "confetti"
-    ) {
-
-      document
-        .querySelector(
-          "#accentText"
-        )
-        .textContent =
-        message;
-    }
-
-
-    /* =========================================
-       REDUCED MOTION
-    ========================================= */
-
-    const reducedMotion =
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      );
-
-
-    /*
-      Confetti is decorative and runs only
-      when reduced motion is not requested.
-    */
-
-    if (!reducedMotion.matches) {
-
-      const canvas =
-        document.querySelector(
-          "#confetti"
-        );
-
-
-      const ctx =
-        canvas.getContext("2d");
-
-
-      let width;
-      let height;
-
-
-      /* =====================================
-         HIGH-DPI / RESPONSIVE CANVAS
-      ===================================== */
-
-      function resizeCanvas() {
-
-        const dpr =
-          window.devicePixelRatio
-          || 1;
-
-
-        width =
-          window.innerWidth;
-
-
-        height =
-          window.innerHeight;
-
-
-        canvas.width =
-          Math.floor(
-            width * dpr
-          );
-
-
-        canvas.height =
-          Math.floor(
-            height * dpr
-          );
-
-
-        canvas.style.width =
-          width + "px";
-
-
-        canvas.style.height =
-          height + "px";
-
-
-        ctx.setTransform(
-          dpr,
-          0,
-          0,
-          dpr,
-          0,
-          0
-        );
-      }
-
-
-      window.addEventListener(
-        "resize",
-        resizeCanvas
-      );
-
-
-      resizeCanvas();
-
-
-      /* =====================================
-         CREATE CONFETTI
-      ===================================== */
-
-      const pieces = [];
-
-
-      const pieceCount =
-        width < 500
-          ? 70
-          : 100;
-
-
-      for (
-        let i = 0;
-        i < pieceCount;
-        i++
-      ) {
-
-        pieces.push({
-
-          /*
-            Spread pieces across the
-            entire iframe width.
-          */
-
-          x:
-            Math.random()
-            * width,
-
-
-          /*
-            Start above the visible area
-            at different heights.
-          */
-
-          y:
-            -Math.random()
-            * height,
-
-
-          width:
-            5
-            + Math.random()
-            * 5,
-
-
-          height:
-            8
-            + Math.random()
-            * 9,
-
-
-          color:
-            theme.confetti[
-              Math.floor(
-                Math.random()
-                * theme.confetti.length
-              )
-            ],
-
-
-          speed:
-            2
-            + Math.random()
-            * 3,
-
-
-          drift:
-            -1
-            + Math.random()
-            * 2,
-
-
-          rotation:
-            Math.random()
-            * Math.PI,
-
-
-          rotationSpeed:
-            -0.08
-            + Math.random()
-            * 0.16
-
-        });
-      }
-
-
-      /* =====================================
-         ANIMATION
-      ===================================== */
-
-      let startTime = null;
-
-
-      /*
-        Runs once rather than continuously.
-        This keeps the celebration brief.
-      */
-
-      const duration =
-        3400;
-
-
-      function draw(timestamp) {
-
-        if (!startTime) {
-
-          startTime =
-            timestamp;
+        if (reducedMotion) {
+          celebrateButton.classList.add("visible");
+          return;
         }
 
+        const isMobile = window.matchMedia("(max-width: 600px)").matches;
+        const starCount = isMobile ? 70 : 120;
+        const fragment = document.createDocumentFragment();
 
-        const elapsed =
-          timestamp
-          - startTime;
-
-
-        ctx.clearRect(
-          0,
-          0,
-          width,
-          height
-        );
-
-
-        pieces.forEach(
-          piece => {
-
-
-            piece.y +=
-              piece.speed;
-
-
-            piece.x +=
-              piece.drift;
-
-
-            piece.rotation +=
-              piece.rotationSpeed;
-
-
-            ctx.save();
-
-
-            ctx.translate(
-              piece.x,
-              piece.y
-            );
-
-
-            ctx.rotate(
-              piece.rotation
-            );
-
-
-            ctx.fillStyle =
-              piece.color;
-
-
-            ctx.fillRect(
-              -piece.width / 2,
-              -piece.height / 2,
-              piece.width,
-              piece.height
-            );
-
-
-            ctx.restore();
-
-          }
-        );
-
-
-        if (
-          elapsed <
-          duration
-        ) {
-
-          requestAnimationFrame(
-            draw
-          );
-
-        } else {
-
-          /*
-            Remove the pieces after
-            the celebration finishes.
-          */
-
-          ctx.clearRect(
-            0,
-            0,
-            width,
-            height
-          );
+        for (let i = 0; i < starCount; i++) {
+          fragment.appendChild(createStar());
         }
+
+        starsContainer.appendChild(fragment);
+
+        // Restart the CSS animations.
+        void starsContainer.offsetWidth;
+        starsContainer.classList.add("celebrating");
+
+        celebrationTimer = window.setTimeout(() => {
+          starsContainer.classList.remove("celebrating");
+          starsContainer.replaceChildren();
+          celebrateButton.classList.add("visible");
+        }, celebrationDuration);
       }
 
+      celebrateButton.addEventListener("click", startCelebration);
 
-      requestAnimationFrame(
-        draw
-      );
-    }
-
+      startCelebration();
+    })();
   </script>
-
 </body>
-
 </html>
