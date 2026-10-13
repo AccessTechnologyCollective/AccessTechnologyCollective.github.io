@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meetings – Access Technology Collective</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #1a1a2e;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        header img {
+            height: 60px;
+        }
+
+        header h1 {
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        /* NAV */
+        nav {
+            background-color: #16213e;
+            padding: 12px 40px;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #a8c0e0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #fff;
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            background: linear-gradient(135deg, #16213e, #0f3460);
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .page-hero h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-hero p {
+            font-size: 1.05rem;
+            color: #a8c0e0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* CALENDAR SECTION */
+        .section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #16213e;
+            border-bottom: 3px solid #0f3460;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .calendar-note {
+            background: #f0f4fa;
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .calendar-note strong {
+            color: #0f3460;
+        }
+
+        .calendar-wrapper {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            min-height: 500px;
+        }
+
+        .styled-calendar-container {
+            width: 100%;
+            border: none;
+            min-height: 500px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #1a1a2e;
+            color: #a8c0e0;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #d4e2f5;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <img src="images/atc white.png" alt="Access Technology Collective logo">
+        <h1>Access Technology Collective</h1>
+    </header>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="meetings.html" class="active">Meetings</a>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <h2>Meetings</h2>
+        <p>View upcoming ATC meetings, agendas, and past meeting notes.</p>
+    </section>
+
+    <!-- CALENDAR -->
+    <section class="section">
+        <h3>Meeting Calendar</h3>
+        <div class="calendar-note">
+            <strong>How to use:</strong> Click on an event to view the Zoom link, agenda, and meeting notes.
+        </div>
+        <div class="calendar-wrapper">
+            <iframe src="https://embed.styledcalendar.com/#NaxeY8h72X7407N0ST6c" title="Styled Calendar" class="styled-calendar-container" data-cy="calendar-embed-iframe"></iframe>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Access Technology Collective – Region E</p>
+        <p>California Community Colleges</p>
+    </footer>
+
+    <script async type="module" src="https://embed.styledcalendar.com/assets/parent-window.js"></script>
+
+</body>
+</html>
