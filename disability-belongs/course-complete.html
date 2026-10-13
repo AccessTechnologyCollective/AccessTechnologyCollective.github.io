@@ -2,17 +2,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://cdn.tailwindcss.com"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Celebrate completing Disability Belongs at SDCCD.">
+
   <meta property="og:title" content="Course Complete — Disability Belongs at SDCCD">
   <meta property="og:description" content="Celebrate completing Disability Belongs at SDCCD.">
   <meta property="og:image" content="https://cdn.simulationtheory.ai/gasset/?asset=img&amp;prompt=teal%20checkmark%20in%20a%20circle%20on%20a%20dark%20background&amp;w=64&amp;h=64&amp;style=professional">
   <meta property="og:type" content="website">
+
   <link rel="icon" href="https://cdn.simulationtheory.ai/gasset/?asset=img&amp;prompt=teal%20checkmark%20in%20a%20circle%20on%20a%20dark%20background&amp;w=64&amp;h=64&amp;style=professional">
+
   <title>Course Complete — Disability Belongs at SDCCD</title>
-  <script src="/chat/cdn/papaparse.min.js"></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
     .star {
       position: absolute;
@@ -21,76 +25,224 @@
       color: var(--color);
       font-size: var(--size);
       line-height: 1;
-      animation: fall var(--duration) linear var(--delay) infinite;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #stars.celebrating .star {
+      opacity: 1;
+      animation: fall var(--duration) linear var(--delay) 1 forwards;
     }
 
     @keyframes fall {
       from {
         transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
       }
 
       to {
         transform: translate(var(--drift), 380px) rotate(360deg);
+        opacity: 0;
       }
     }
 
+    .celebrate-button {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 20px;
+      border: 2px solid #31a9e0;
+      border-radius: 8px;
+      background-color: #222222;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .celebrate-button:hover {
+      background-color: #0054a4;
+    }
+
+    .celebrate-button:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 4px;
+    }
+
+    .celebrate-button[hidden] {
+      display: none;
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .star {
+      #stars.celebrating .star {
         animation: none;
         top: var(--resting-top);
+        opacity: 1;
       }
     }
   </style>
 </head>
-<body class="m-0 bg-[#222222] font-sans text-white">
-  <main class="relative flex h-[300px] w-full items-center justify-center overflow-hidden text-center">
-    <div id="stars" class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true"></div>
 
-    <div class="relative z-10 max-w-[calc(100%-32px)]">
-      <svg class="mx-auto mb-4 block h-14 w-14" viewBox="0 0 56 56" aria-hidden="true">
-        <circle cx="28" cy="28" r="25" fill="none" stroke="#31a9e0" stroke-width="3"></circle>
-        <path d="M16 28l8 8 16-18" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+<body class="m-0 bg-[#222222] font-sans text-white">
+
+  <main class="relative flex min-h-[340px] w-full items-center justify-center overflow-hidden px-4 py-6 text-center">
+
+    <div
+      id="stars"
+      class="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true">
+    </div>
+
+    <div class="relative z-10 w-full max-w-2xl">
+
+      <svg
+        class="mx-auto mb-4 block h-14 w-14"
+        viewBox="0 0 56 56"
+        aria-hidden="true">
+        <circle
+          cx="28"
+          cy="28"
+          r="25"
+          fill="none"
+          stroke="#31a9e0"
+          stroke-width="3">
+        </circle>
+        <path
+          d="M16 28l8 8 16-18"
+          fill="none"
+          stroke="#ffffff"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+        </path>
       </svg>
 
-      <h1 class="m-0 text-[clamp(28px,6vw,42px)] font-bold leading-tight">Course Complete</h1>
-      <p class="mt-2.5 text-[clamp(16px,3vw,20px)] leading-snug">Disability Belongs at SDCCD</p>
+      <h1 class="m-0 text-[clamp(28px,6vw,42px)] font-bold leading-tight">
+        Course Complete
+      </h1>
+
+      <p class="mt-2.5 text-[clamp(16px,3vw,20px)] leading-snug">
+        Disability Belongs at SDCCD
+      </p>
+
+      <button
+        id="celebrateButton"
+        class="celebrate-button"
+        type="button"
+        hidden>
+        Celebrate Again!
+      </button>
+
     </div>
   </main>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      try {
-        const container = document.getElementById("stars");
-        if (!container) {
-          throw new Error("Stars container was not found.");
-        }
+      const container = document.getElementById("stars");
+      const button = document.getElementById("celebrateButton");
 
-        const colors = ["#31a9e0", "#be1e2d", "#0054a4", "#1e9097", "#5F3688"];
-        const fragment = document.createDocumentFragment();
+      if (!container || !button) {
+        console.error("The celebration elements could not be found.");
+        return;
+      }
 
-        for (let i = 0; i < 75; i++) {
-          const star = document.createElement("span");
-          const duration = 3.5 + Math.random() * 2.5;
+      const colors = [
+        "#31a9e0",
+        "#be1e2d",
+        "#0054a4",
+        "#1e9097",
+        "#5F3688"
+      ];
 
-          star.className = "star";
-          star.textContent = "★";
-          star.style.setProperty("--color", colors[i % colors.length]);
-          star.style.setProperty("--left", `${Math.random() * 100}%`);
-          star.style.setProperty("--size", `${20 + Math.random() * 12}px`);
-          star.style.setProperty("--duration", `${duration}s`);
-          star.style.setProperty("--delay", `${-Math.random() * duration}s`);
-          star.style.setProperty("--drift", `${Math.random() * 80 - 40}px`);
-          star.style.setProperty("--resting-top", `${Math.random() * 280}px`);
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      );
 
-          fragment.appendChild(star);
-        }
+      const celebrationDuration = 5000;
+      let celebrationTimer;
 
-        container.appendChild(fragment);
-      } catch (error) {
-        console.error("Could not initialize the falling stars:", error);
+      // Create the stars.
+      const fragment = document.createDocumentFragment();
+
+      for (let i = 0; i < 75; i++) {
+        const star = document.createElement("span");
+        const duration = 3.5 + Math.random() * 1.5;
+
+        star.className = "star";
+        star.textContent = "\u2605";
+
+        star.style.setProperty(
+          "--color",
+          colors[i % colors.length]
+        );
+
+        star.style.setProperty(
+          "--left",
+          `${Math.random() * 100}%`
+        );
+
+        star.style.setProperty(
+          "--size",
+          `${20 + Math.random() * 12}px`
+        );
+
+        star.style.setProperty(
+          "--duration",
+          `${duration}s`
+        );
+
+        star.style.setProperty(
+          "--delay",
+          `${-Math.random() * duration}s`
+        );
+
+        star.style.setProperty(
+          "--drift",
+          `${Math.random() * 80 - 40}px`
+        );
+
+        star.style.setProperty(
+          "--resting-top",
+          `${Math.random() * 280}px`
+        );
+
+        fragment.appendChild(star);
+      }
+
+      container.appendChild(fragment);
+
+      // Start or restart the celebration.
+      function startCelebration() {
+        clearTimeout(celebrationTimer);
+
+        // Remove the previous animation and reset it.
+        container.classList.remove("celebrating");
+        void container.offsetWidth;
+
+        // Hide the button while the celebration plays.
+        button.hidden = true;
+
+        // Start the falling-star animation.
+        container.classList.add("celebrating");
+
+        // Stop the celebration after five seconds.
+        celebrationTimer = setTimeout(() => {
+          container.classList.remove("celebrating");
+          button.hidden = false;
+        }, celebrationDuration);
+      }
+
+      // Allow visitors to celebrate again.
+      button.addEventListener("click", startCelebration);
+
+      // Automatically celebrate when the page loads,
+      // unless the visitor prefers reduced motion.
+      if (reducedMotion.matches) {
+        button.hidden = false;
+      } else {
+        startCelebration();
       }
     });
   </script>
+
 </body>
 </html>
-        
