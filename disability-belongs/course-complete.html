@@ -18,6 +18,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
+    /* Falling stars */
     .star {
       position: absolute;
       top: -40px;
@@ -27,6 +28,11 @@
       line-height: 1;
       opacity: 0;
       pointer-events: none;
+      text-shadow:
+        0 0 8px currentColor,
+        0 0 16px currentColor,
+        0 0 24px currentColor;
+      will-change: transform, opacity;
     }
 
     #stars.celebrating .star {
@@ -35,28 +41,41 @@
     }
 
     @keyframes fall {
-      from {
+      0% {
         transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
         opacity: 1;
       }
 
-      to {
+      75% {
+        opacity: 1;
+      }
+
+      100% {
         transform: translate(var(--drift), 380px) rotate(360deg);
         opacity: 0;
       }
     }
 
+    /* Celebrate Again button */
     .celebrate-button {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 10px 20px;
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 100;
+      padding: 12px 20px;
       border: 2px solid #31a9e0;
       border-radius: 8px;
       background-color: #222222;
       color: #ffffff;
+      font-family: inherit;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
+      box-shadow: 0 0 10px rgba(49, 169, 224, 0.35);
     }
 
     .celebrate-button:hover {
@@ -72,11 +91,23 @@
       display: none;
     }
 
+    /* Keep the button comfortably positioned on small screens */
+    @media (max-width: 480px) {
+      .celebrate-button {
+        left: 12px;
+        bottom: 12px;
+        padding: 10px 16px;
+        font-size: 15px;
+      }
+    }
+
+    /* Respect reduced-motion preferences */
     @media (prefers-reduced-motion: reduce) {
       #stars.celebrating .star {
         animation: none;
         top: var(--resting-top);
         opacity: 1;
+        will-change: auto;
       }
     }
   </style>
@@ -86,18 +117,22 @@
 
   <main class="relative flex min-h-[340px] w-full items-center justify-center overflow-hidden px-4 py-6 text-center">
 
+    <!-- Decorative star layer -->
     <div
       id="stars"
       class="pointer-events-none absolute inset-0 overflow-hidden"
       aria-hidden="true">
     </div>
 
+    <!-- Main completion message -->
     <div class="relative z-10 w-full max-w-2xl">
 
+      <!-- Checkmark icon -->
       <svg
         class="mx-auto mb-4 block h-14 w-14"
         viewBox="0 0 56 56"
         aria-hidden="true">
+
         <circle
           cx="28"
           cy="28"
@@ -106,6 +141,7 @@
           stroke="#31a9e0"
           stroke-width="3">
         </circle>
+
         <path
           d="M16 28l8 8 16-18"
           fill="none"
@@ -124,16 +160,17 @@
         Disability Belongs at SDCCD
       </p>
 
-      <button
-        id="celebrateButton"
-        class="celebrate-button"
-        type="button"
-        hidden>
-        Celebrate Again!
-      </button>
-
     </div>
   </main>
+
+  <!-- Button fixed to the bottom-left of the screen -->
+  <button
+    id="celebrateButton"
+    class="celebrate-button"
+    type="button"
+    hidden>
+    Celebrate Again!
+  </button>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -157,15 +194,16 @@
         "(prefers-reduced-motion: reduce)"
       );
 
-      const celebrationDuration = 5000;
+      // Celebration runs for 8 seconds.
+      const celebrationDuration = 8000;
       let celebrationTimer;
 
-      // Create the stars.
+      // Create 75 stars with varied sizes and movement.
       const fragment = document.createDocumentFragment();
 
       for (let i = 0; i < 75; i++) {
         const star = document.createElement("span");
-        const duration = 3.5 + Math.random() * 1.5;
+        const duration = 4.5 + Math.random() * 2;
 
         star.className = "star";
         star.textContent = "\u2605";
@@ -182,7 +220,7 @@
 
         star.style.setProperty(
           "--size",
-          `${20 + Math.random() * 12}px`
+          `${24 + Math.random() * 16}px`
         );
 
         star.style.setProperty(
@@ -210,32 +248,31 @@
 
       container.appendChild(fragment);
 
-      // Start or restart the celebration.
       function startCelebration() {
         clearTimeout(celebrationTimer);
 
-        // Remove the previous animation and reset it.
+        // Reset the animation so it can play again.
         container.classList.remove("celebrating");
         void container.offsetWidth;
 
-        // Hide the button while the celebration plays.
+        // Hide the button while the stars are falling.
         button.hidden = true;
 
-        // Start the falling-star animation.
+        // Start the celebration.
         container.classList.add("celebrating");
 
-        // Stop the celebration after five seconds.
+        // Stop after 8 seconds and show the button again.
         celebrationTimer = setTimeout(() => {
           container.classList.remove("celebrating");
           button.hidden = false;
         }, celebrationDuration);
       }
 
-      // Allow visitors to celebrate again.
+      // Restart the celebration when the button is activated.
       button.addEventListener("click", startCelebration);
 
-      // Automatically celebrate when the page loads,
-      // unless the visitor prefers reduced motion.
+      // Automatically celebrate on page load unless
+      // the visitor prefers reduced motion.
       if (reducedMotion.matches) {
         button.hidden = false;
       } else {
