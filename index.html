@@ -15,6 +15,29 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
             line-height: 1.6;
+            position: relative;
+        }
+
+        /* EMBOSSED REPEATING LOGO BACKGROUND */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/atc white.png');
+            background-repeat: repeat;
+            background-size: 120px;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+            aria-hidden: true;
+        }
+
+        body > * {
+            position: relative;
+            z-index: 1;
         }
 
         /* HEADER */
@@ -34,6 +57,27 @@
             color: #fff;
             font-size: 1.4rem;
             font-weight: 600;
+        }
+
+        /* NAV */
+        nav {
+            background-color: #16213e;
+            padding: 12px 40px;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #a8c0e0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #fff;
         }
 
         /* HERO */
@@ -64,7 +108,7 @@
             color: #d4e2f5;
         }
 
-        /* PROJECTS SECTION */
+        /* SECTIONS */
         .section {
             max-width: 900px;
             margin: 0 auto;
@@ -182,19 +226,25 @@
         <h1>Access Technology Collective</h1>
     </header>
 
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="meetings.html">Meetings</a>
+    </nav>
+
     <!-- HERO -->
     <section class="hero">
         <h2>Access Technology Collective</h2>
         <p class="subtitle">Region E – California Community Colleges</p>
         <p class="purpose">
-            We are a project-based working group of accessibility professionals from across Region E with the aim to promote the accessibility and usability of technologies utilized by the campus community through advocacy and collaboration. ​.
+            We are a project-based working group of accessibility professionals from across Region E with the aim to promote the accessibility and usability of technologies utilized by the campus community through advocacy and collaboration.
         </p>
     </section>
 
-
+    <!-- MEMBERS -->
     <section class="section team-section">
         <h3>Members</h3>
-        <p style="margin-bottom: 10px; color: #555;">The ATC includes respresentation from the following California Community Colleges:</p>
+        <p style="margin-bottom: 10px; color: #555;">The ATC includes representation from the following California Community Colleges:</p>
         <div class="team-grid">
             <div class="team-card">
                 <h4>Cuyamaca College</h4>
@@ -235,10 +285,11 @@
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer>
         <p>&copy; 2025 Access Technology Collective – Region E</p>
         <p>California Community Colleges</p>
-        
+    </footer>
 
 </body>
 </html>
