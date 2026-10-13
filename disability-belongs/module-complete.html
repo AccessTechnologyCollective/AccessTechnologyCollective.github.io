@@ -161,12 +161,6 @@
 
     /* =========================================
        CONFETTI-ONLY MODE
-
-       Canvas can use:
-       ?theme=purple&mode=confetti
-
-       The dark background remains, but all
-       duplicate completion text disappears.
     ========================================= */
 
     body.confetti-only .message {
@@ -227,9 +221,6 @@
 
     /* =========================================
        REDUCED MOTION
-
-       Motion-sensitive users receive
-       the static completed state.
     ========================================= */
 
     @media (prefers-reduced-motion: reduce) {
@@ -250,25 +241,14 @@
     aria-label="Module completion celebration"
   >
 
-    <!--
-      Static accessible equivalent.
-      The confetti itself is decorative.
-    -->
-
     <p class="sr-only">
       Module complete.
     </p>
-
-
-    <!-- Decorative animation -->
 
     <canvas
       id="confetti"
       aria-hidden="true"
     ></canvas>
-
-
-    <!-- Optional visible completion message -->
 
     <div
       class="message"
@@ -294,470 +274,258 @@
 
   <script>
 
-    /* =========================================
-       URL PARAMETERS
-
-       Examples:
-
-       ?theme=purple
-
-       ?theme=purple&mode=confetti
-
-       ?theme=purple&message=Module%201%20complete!
-    ========================================= */
-
     const params =
       new URLSearchParams(
         window.location.search
       );
 
 
-    /* =========================================
-       COLOR THEMES
-
-       The accent values are intentionally
-       lighter than the core brand colors
-       so they remain readable on #222222.
-    ========================================= */
-
     const themes = {
 
-
-      /* -----------------------------
-         DISTRICT AZURE
-      ----------------------------- */
-
       azure: {
-
         accent: "#A0D4EE",
-
         confetti: [
-          "#31A9E0",
-          "#6FC5EC",
-          "#A0D4EE",
-          "#D5EFFA",
-          "#FFFFFF"
+          "#31A9E0", "#6FC5EC", "#A0D4EE",
+          "#D5EFFA", "#FFFFFF"
         ]
       },
-
-
-      /* -----------------------------
-         RED
-      ----------------------------- */
 
       red: {
-
         accent: "#F29AA3",
-
         confetti: [
-          "#BE1E2D",
-          "#D94A58",
-          "#E87681",
-          "#F29AA3",
-          "#FFFFFF"
+          "#BE1E2D", "#D94A58", "#E87681",
+          "#F29AA3", "#FFFFFF"
         ]
       },
-
-
-      /* -----------------------------
-         DARK BLUE
-      ----------------------------- */
 
       darkblue: {
-
         accent: "#79BCE8",
-
         confetti: [
-          "#0054A4",
-          "#2478BE",
-          "#31A9E0",
-          "#79BCE8",
-          "#A0D4EE",
-          "#FFFFFF"
+          "#0054A4", "#2478BE", "#31A9E0",
+          "#79BCE8", "#A0D4EE", "#FFFFFF"
         ]
       },
-
-
-      /* -----------------------------
-         TEAL
-      ----------------------------- */
 
       teal: {
-
         accent: "#83D0D4",
-
         confetti: [
-          "#1E9097",
-          "#4DB2B8",
-          "#83D0D4",
-          "#A9E2E5",
-          "#FFFFFF"
+          "#1E9097", "#4DB2B8", "#83D0D4",
+          "#A9E2E5", "#FFFFFF"
         ]
       },
-
-
-      /* -----------------------------
-         PURPLE
-         Module 1
-      ----------------------------- */
 
       purple: {
-
-        /*
-          Core purple #5F3688 is still
-          included in the confetti, but
-          the text/accent uses the lighter
-          #B99AD2 for better contrast.
-        */
-
         accent: "#B99AD2",
-
         confetti: [
-          "#5F3688",
-          "#7E57A5",
-          "#9B75BC",
-          "#B99AD2",
-          "#D4BFE5",
-          "#31A9E0",
+          "#5F3688", "#7E57A5", "#9B75BC",
+          "#B99AD2", "#D4BFE5", "#31A9E0",
           "#FFFFFF"
         ]
       },
 
-
-      /* -----------------------------
-         ALL DISTRICT COLORS
-      ----------------------------- */
-
       multicolor: {
-
         accent: "#A0D4EE",
-
         confetti: [
-          "#31A9E0",
-          "#A0D4EE",
-          "#F29AA3",
-          "#79BCE8",
-          "#83D0D4",
-          "#B99AD2",
+          "#31A9E0", "#A0D4EE", "#F29AA3",
+          "#79BCE8", "#83D0D4", "#B99AD2",
           "#FFFFFF"
         ]
       }
 
     };
-
-
-    /* =========================================
-       SELECT THEME
-    ========================================= */
+        
 
     const themeName =
-      params.get("theme")
-      || "azure";
-
+      params.get("theme") || "azure";
 
     const theme =
-      themes[themeName]
-      || themes.azure;
-
+      themes[themeName] || themes.azure;
 
     document.documentElement
       .style
-      .setProperty(
-        "--accent",
-        theme.accent
-      );
+      .setProperty("--accent", theme.accent);
 
-
-    /* =========================================
-       CONFETTI-ONLY MODE
-    ========================================= */
-
-    const mode =
-      params.get("mode");
-
+    const mode = params.get("mode");
 
     if (mode === "confetti") {
-
       document.body
-        .classList.add(
-          "confetti-only"
-        );
+        .classList.add("confetti-only");
     }
 
+    const message = params.get("message");
 
-    /* =========================================
-       OPTIONAL CUSTOM MESSAGE
-
-       Not used when mode=confetti.
-    ========================================= */
-
-    const message =
-      params.get("message");
-
-
-    if (
-      message &&
-      mode !== "confetti"
-    ) {
-
+    if (message && mode !== "confetti") {
       document
-        .querySelector(
-          "#accentText"
-        )
-        .textContent =
-        message;
+        .querySelector("#accentText")
+        .textContent = message;
     }
-
-
-    /* =========================================
-       REDUCED MOTION
-    ========================================= */
 
     const reducedMotion =
       window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       );
 
-
-    /*
-      Confetti is decorative and runs only
-      when reduced motion is not requested.
-    */
-
     if (!reducedMotion.matches) {
 
       const canvas =
-        document.querySelector(
-          "#confetti"
-        );
-
+        document.querySelector("#confetti");
 
       const ctx =
         canvas.getContext("2d");
 
-
       let width;
       let height;
-
-
-      /* =====================================
-         HIGH-DPI / RESPONSIVE CANVAS
-      ===================================== */
 
       function resizeCanvas() {
 
         const dpr =
-          window.devicePixelRatio
-          || 1;
+          window.devicePixelRatio || 1;
 
-
-        width =
-          window.innerWidth;
-
-
-        height =
-          window.innerHeight;
-
+        width = window.innerWidth;
+        height = window.innerHeight;
 
         canvas.width =
-          Math.floor(
-            width * dpr
-          );
-
+          Math.floor(width * dpr);
 
         canvas.height =
-          Math.floor(
-            height * dpr
-          );
-
+          Math.floor(height * dpr);
 
         canvas.style.width =
           width + "px";
 
-
         canvas.style.height =
           height + "px";
 
-
         ctx.setTransform(
-          dpr,
-          0,
-          0,
-          dpr,
-          0,
-          0
+          dpr, 0, 0, dpr, 0, 0
         );
       }
 
-
       window.addEventListener(
-        "resize",
-        resizeCanvas
+        "resize", resizeCanvas
       );
 
-
       resizeCanvas();
-
 
       /* =====================================
          CREATE CONFETTI
       ===================================== */
 
-      const pieces = [];
 
+        const pieces = [];
 
-      const pieceCount =
-        width < 500
-          ? 70
-          : 100;
+        const pieceCount =
+          width < 500 ? 70 : 100;
 
+        for (
+          let i = 0;
+          i < pieceCount;
+          i++
+        ) {
 
-      for (
-        let i = 0;
-        i < pieceCount;
-        i++
-      ) {
+          pieces.push({
 
-        pieces.push({
+            x:
+              Math.random() * width,
 
-          /*
-            Spread pieces across the
-            entire iframe width.
-          */
+            y:
+              -Math.random() * height,
 
-          x:
-            Math.random()
-            * width,
+            width:
+              5 + Math.random() * 5,
 
+            height:
+              8 + Math.random() * 9,
 
-          /*
-            Start above the visible area
-            at different heights.
-          */
+            color:
+              theme.confetti[
+                Math.floor(
+                  Math.random()
+                  * theme.confetti.length
+                )
+              ],
 
-          y:
-            -Math.random()
-            * height,
+            speed:
+              2 + Math.random() * 3,
 
+            drift:
+              -1 + Math.random() * 2,
 
-          width:
-            5
-            + Math.random()
-            * 5,
+            rotation:
+              Math.random() * Math.PI,
 
+            rotationSpeed:
+              -0.08 + Math.random() * 0.16
 
-          height:
-            8
-            + Math.random()
-            * 9,
-
-
-          color:
-            theme.confetti[
-              Math.floor(
-                Math.random()
-                * theme.confetti.length
-              )
-            ],
-
-
-          speed:
-            2
-            + Math.random()
-            * 3,
-
-
-          drift:
-            -1
-            + Math.random()
-            * 2,
-
-
-          rotation:
-            Math.random()
-            * Math.PI,
-
-
-          rotationSpeed:
-            -0.08
-            + Math.random()
-            * 0.16
-
-        });
-      }
-
-
-      /* =====================================
-         ANIMATION
-      ===================================== */
-
-      let startTime = null;
-
-
-      /*
-        Runs once rather than continuously.
-        This keeps the celebration brief.
-      */
-
-      const duration =
-        3400;
-
-
-      function draw(timestamp) {
-
-        if (!startTime) {
-
-          startTime =
-            timestamp;
+          });
         }
 
+        let startTime = null;
 
-        const elapsed =
-          timestamp
-          - startTime;
+        const duration = 10000;
 
+        function resetPiece(piece) {
+          piece.x = Math.random() * width;
+          piece.y = -10 - Math.random() * 40;
+          piece.speed = 2 + Math.random() * 3;
+          piece.drift = -1 + Math.random() * 2;
+          piece.rotation = Math.random() * Math.PI;
+          piece.rotationSpeed = -0.08 + Math.random() * 0.16;
+          piece.color = theme.confetti[
+            Math.floor(
+              Math.random()
+              * theme.confetti.length
+            )
+          ];
+        }
 
-        ctx.clearRect(
-          0,
-          0,
-          width,
-          height
-        );
+        function draw(timestamp) {
 
+          if (!startTime) {
+            startTime = timestamp;
+          }
 
-        pieces.forEach(
-          piece => {
+          const elapsed =
+            timestamp - startTime;
 
+          const fadeStart =
+            duration - 2000;
 
-            piece.y +=
-              piece.speed;
+          let globalAlpha = 1;
 
+          if (elapsed > fadeStart) {
+            globalAlpha =
+              1
+              - (elapsed - fadeStart)
+              / 2000;
+          }
 
-            piece.x +=
-              piece.drift;
+          ctx.clearRect(
+            0, 0, width, height
+          );
 
+          ctx.globalAlpha = globalAlpha;
 
+          pieces.forEach(piece => {
+
+            piece.y += piece.speed;
+            piece.x += piece.drift;
             piece.rotation +=
               piece.rotationSpeed;
 
+            if (piece.y > height + 20) {
+              resetPiece(piece);
+            }
 
             ctx.save();
 
-
             ctx.translate(
-              piece.x,
-              piece.y
+              piece.x, piece.y
             );
 
+            ctx.rotate(piece.rotation);
 
-            ctx.rotate(
-              piece.rotation
-            );
-
-
-            ctx.fillStyle =
-              piece.color;
-
+            ctx.fillStyle = piece.color;
 
             ctx.fillRect(
               -piece.width / 2,
@@ -766,43 +534,27 @@
               piece.height
             );
 
-
             ctx.restore();
 
+          });
+
+          ctx.globalAlpha = 1;
+
+          if (elapsed < duration) {
+
+            requestAnimationFrame(draw);
+
+          } else {
+
+            ctx.clearRect(
+              0, 0, width, height
+            );
           }
-        );
-
-
-        if (
-          elapsed <
-          duration
-        ) {
-
-          requestAnimationFrame(
-            draw
-          );
-
-        } else {
-
-          /*
-            Remove the pieces after
-            the celebration finishes.
-          */
-
-          ctx.clearRect(
-            0,
-            0,
-            width,
-            height
-          );
         }
+
+        requestAnimationFrame(draw);
       }
-
-
-      requestAnimationFrame(
-        draw
-      );
-    }
+        
 
   </script>
 
