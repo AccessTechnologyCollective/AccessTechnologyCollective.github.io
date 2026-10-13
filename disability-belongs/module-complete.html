@@ -460,100 +460,99 @@
           });
         }
 
-        let startTime = null;
 
-        const duration = 10000;
+          let startTime = null;
 
-        function resetPiece(piece) {
-          piece.x = Math.random() * width;
-          piece.y = -10 - Math.random() * 40;
-          piece.speed = 2 + Math.random() * 3;
-          piece.drift = -1 + Math.random() * 2;
-          piece.rotation = Math.random() * Math.PI;
-          piece.rotationSpeed = -0.08 + Math.random() * 0.16;
-          piece.color = theme.confetti[
-            Math.floor(
-              Math.random()
-              * theme.confetti.length
-            )
-          ];
-        }
+          const duration = 10000;
 
-        function draw(timestamp) {
+          const recycleStopTime = duration - 2000;
 
-          if (!startTime) {
-            startTime = timestamp;
+          function resetPiece(piece) {
+            piece.x = Math.random() * width;
+            piece.y = -10 - Math.random() * 40;
+            piece.speed = 2 + Math.random() * 3;
+            piece.drift = -1 + Math.random() * 2;
+            piece.rotation = Math.random() * Math.PI;
+            piece.rotationSpeed = -0.08 + Math.random() * 0.16;
+            piece.color = theme.confetti[
+              Math.floor(
+                Math.random()
+                * theme.confetti.length
+              )
+            ];
           }
 
-          const elapsed =
-            timestamp - startTime;
+          function draw(timestamp) {
 
-          const fadeStart =
-            duration - 2000;
-
-          let globalAlpha = 1;
-
-          if (elapsed > fadeStart) {
-            globalAlpha =
-              1
-              - (elapsed - fadeStart)
-              / 2000;
-          }
-
-          ctx.clearRect(
-            0, 0, width, height
-          );
-
-          ctx.globalAlpha = globalAlpha;
-
-          pieces.forEach(piece => {
-
-            piece.y += piece.speed;
-            piece.x += piece.drift;
-            piece.rotation +=
-              piece.rotationSpeed;
-
-            if (piece.y > height + 20) {
-              resetPiece(piece);
+            if (!startTime) {
+              startTime = timestamp;
             }
 
-            ctx.save();
-
-            ctx.translate(
-              piece.x, piece.y
-            );
-
-            ctx.rotate(piece.rotation);
-
-            ctx.fillStyle = piece.color;
-
-            ctx.fillRect(
-              -piece.width / 2,
-              -piece.height / 2,
-              piece.width,
-              piece.height
-            );
-
-            ctx.restore();
-
-          });
-
-          ctx.globalAlpha = 1;
-
-          if (elapsed < duration) {
-
-            requestAnimationFrame(draw);
-
-          } else {
+            const elapsed =
+              timestamp - startTime;
 
             ctx.clearRect(
               0, 0, width, height
             );
-          }
-        }
 
-        requestAnimationFrame(draw);
-      }
+            let anyVisible = false;
+
+            pieces.forEach(piece => {
+
+              piece.y += piece.speed;
+              piece.x += piece.drift;
+              piece.rotation +=
+                piece.rotationSpeed;
+
+              if (piece.y > height + 20) {
+                if (elapsed < recycleStopTime) {
+                  resetPiece(piece);
+                } else {
+                  piece.y = height + 100;
+                  return;
+                }
+              }
+
+              if (piece.y < height + 50) {
+                anyVisible = true;
+              }
+
+              ctx.save();
+
+              ctx.translate(
+                piece.x, piece.y
+              );
+
+              ctx.rotate(piece.rotation);
+
+              ctx.fillStyle = piece.color;
+
+              ctx.fillRect(
+                -piece.width / 2,
+                -piece.height / 2,
+                piece.width,
+                piece.height
+              );
+
+              ctx.restore();
+
+            });
+
+            if (anyVisible && elapsed < duration + 5000) {
+
+              requestAnimationFrame(draw);
+
+            } else {
+
+              ctx.clearRect(
+                0, 0, width, height
+              );
+            }
+          }
+
+          requestAnimationFrame(draw);
+        }
+        
         
 
   </script>
