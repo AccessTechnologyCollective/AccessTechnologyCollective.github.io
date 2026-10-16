@@ -69,10 +69,10 @@
 
 
     /* =================================
-       FIXED DISTRICT TAGLINE
+       MAIN MESSAGE
 
              Be.
-             Belong.
+        I    Belong.
              Become.
 
     ================================= */
@@ -89,22 +89,13 @@
       margin: 0 auto;
 
       gap: 10px;
+
+      /*
+        Existing overall shift.
+      */
+      transform: translateX(24px);
     }
-    /* Shift main animated message slightly right */
-.message {
-  transform: translateX(24px);
-}
 
-.line {
-  position: relative;
-
-  display: block;
-
-  margin: 0;
-  padding: 0;
-
-  text-align: left;
-}
 
     .line {
       position: relative;
@@ -117,6 +108,7 @@
       text-align: left;
     }
 
+
     .brand,
     .belong-wrap {
       font-size: var(--main-size);
@@ -127,8 +119,26 @@
       letter-spacing: -0.02em;
     }
 
+
     .static-word {
       color: var(--white);
+    }
+
+
+    /*
+      NEW:
+      Move only the Be. / Belong. / Become.
+      spine slightly farther right.
+
+      This creates additional space between
+      I / You / We / Disability and Belong.
+
+      All three B's remain aligned.
+    */
+
+    .brand,
+    .belong-wrap {
+      transform: translateX(8px);
     }
 
 
@@ -140,6 +150,7 @@
       position: relative;
     }
 
+
     .belong-wrap {
       display: inline-flex;
       align-items: baseline;
@@ -149,19 +160,24 @@
       white-space: nowrap;
     }
 
+
     .belong-word,
     .ending {
       color: var(--white);
     }
 
+
     .ending {
       display: inline;
     }
 
+
     /*
-      Final frame only:
+      Final frame:
+
       Disability Belongs.
-      becomes entirely blue.
+
+      The entire middle phrase becomes blue.
     */
 
     .belong-wrap.final-blue,
@@ -195,6 +211,7 @@
       line-height: 1;
     }
 
+
     .subject {
       position: absolute;
 
@@ -217,11 +234,13 @@
       transform: translateY(14px);
     }
 
+
     .subject.current {
       opacity: 1;
 
       transform: translateY(0);
     }
+
 
     .subject.enter {
       opacity: 1;
@@ -232,6 +251,7 @@
         opacity 0.45s ease,
         transform 0.45s ease;
     }
+
 
     .subject.exit {
       opacity: 0;
@@ -257,6 +277,7 @@
 
       z-index: 3;
     }
+
 
     .pause-btn {
       appearance: none;
@@ -291,9 +312,11 @@
       cursor: pointer;
     }
 
+
     .pause-btn:hover {
       border-color: var(--blue);
     }
+
 
     .pause-btn:focus-visible {
       outline:
@@ -318,10 +341,13 @@
       z-index: 2;
     }
 
+
     .district-logo img {
       display: block;
+
       width: 120px;
       max-width: 32vw;
+
       height: auto;
     }
 
@@ -362,9 +388,22 @@
 
         --subject-gap: 8px;
       }
+
+
       .message {
-  transform: translateX(14px);
-}
+        transform: translateX(14px);
+      }
+
+
+      /*
+        Slightly smaller fixed-spine shift.
+      */
+
+      .brand,
+      .belong-wrap {
+        transform: translateX(6px);
+      }
+
 
       .banner {
         padding:
@@ -373,14 +412,17 @@
           54px;
       }
 
+
       .subject-wrap {
         width: 9ch;
       }
+
 
       .controls {
         left: 10px;
         bottom: 9px;
       }
+
 
       .pause-btn {
         min-height: 32px;
@@ -390,10 +432,12 @@
         font-size: 11px;
       }
 
+
       .district-logo {
         right: 10px;
         bottom: 9px;
       }
+
 
       .district-logo img {
         width: 90px;
@@ -415,23 +459,41 @@
         --subject-gap: 6px;
       }
 
+
       .banner {
         padding:
           14px
           8px
           49px;
       }
-.message {
-  transform: translateX(8px);
-}
+
+
+      .message {
+        transform: translateX(8px);
+      }
+
+
+      /*
+        Keep additional spacing subtle
+        on narrow phones.
+      */
+
+      .brand,
+      .belong-wrap {
+        transform: translateX(4px);
+      }
+
+
       .subject-wrap {
         width: 8.5ch;
       }
+
 
       .controls {
         left: 8px;
         bottom: 8px;
       }
+
 
       .pause-btn {
         min-height: 30px;
@@ -441,10 +503,12 @@
         font-size: 10px;
       }
 
+
       .district-logo {
         right: 8px;
         bottom: 8px;
       }
+
 
       .district-logo img {
         width: 75px;
@@ -457,7 +521,8 @@
        REDUCED MOTION
 
        Users requesting reduced motion
-       receive the static course message:
+       receive the static final message:
+
        Disability Belongs.
     ================================= */
 
@@ -467,6 +532,7 @@
         transition: none !important;
         transform: none !important;
       }
+
 
       .controls {
         display: none;
@@ -488,9 +554,9 @@
     <!--
       Accessible static equivalent.
 
-      The animated visual is hidden from
-      assistive technology so a screen reader
-      does not repeatedly announce each change.
+      The changing visual is hidden from
+      assistive technology so screen readers
+      do not repeatedly announce the animation.
     -->
 
     <p class="sr-only">
@@ -503,7 +569,7 @@
 
 
     <!-- =================================
-         ANIMATED VISUAL
+         ANIMATED MESSAGE
     ================================= -->
 
     <div
@@ -587,7 +653,7 @@
 
 
     <!-- =================================
-         DISTRICT LOGO
+         SDCCD LOGO
     ================================= -->
 
     <div class="district-logo">
@@ -605,14 +671,9 @@
 
   <script>
 
-    /*
-      Animation:
-
-      I Belong.
-      You Belong.
-      We Belong.
-      Disability Belongs.
-    */
+    /* =================================
+       ANIMATION FRAMES
+    ================================= */
 
     const frames = [
 
@@ -644,20 +705,24 @@
         ".subject.current"
       );
 
+
     const nextEl =
       document.querySelector(
         ".subject.next"
       );
+
 
     const endingEl =
       document.querySelector(
         "#ending"
       );
 
+
     const belongWrap =
       document.querySelector(
         ".belong-wrap"
       );
+
 
     const pauseBtn =
       document.querySelector(
@@ -744,7 +809,7 @@
 
       /*
         Force browser layout before
-        applying transition classes.
+        transition classes are added.
       */
 
       void nextEl.offsetWidth;
@@ -772,9 +837,11 @@
 
 
       /*
-        On the final frame,
-        make Belongs. blue so the complete
-        phrase Disability Belongs. is blue.
+        Final frame:
+
+        Disability Belongs.
+
+        Make the entire middle phrase blue.
       */
 
       if (
@@ -794,34 +861,37 @@
       }
 
 
-      setTimeout(() => {
+      setTimeout(
+        () => {
 
 
-        currentEl.textContent =
-          nextFrame.subject;
+          currentEl.textContent =
+            nextFrame.subject;
 
 
-        currentEl.className =
-          "subject current";
+          currentEl.className =
+            "subject current";
 
 
-        nextEl.textContent =
-          "";
+          nextEl.textContent =
+            "";
 
 
-        nextEl.className =
-          "subject next";
+          nextEl.className =
+            "subject next";
 
 
-        currentIndex =
-          nextIndex;
+          currentIndex =
+            nextIndex;
 
 
-        animating =
-          false;
+          animating =
+            false;
 
 
-      }, 500);
+        },
+        500
+      );
     }
 
 
@@ -855,6 +925,7 @@
         paused ||
         reduceMotion.matches
       ) {
+
         return;
       }
 
@@ -873,17 +944,23 @@
 
     function stopLoop() {
 
-      if (timer !== null) {
+      if (
+        timer !== null
+      ) {
 
-        clearInterval(timer);
+        clearInterval(
+          timer
+        );
 
-        timer = null;
+
+        timer =
+          null;
       }
     }
 
 
     /* =================================
-       PAUSE / PLAY BUTTON
+       PAUSE / PLAY
     ================================= */
 
     pauseBtn.addEventListener(
@@ -923,7 +1000,7 @@
     /* =================================
        REDUCED MOTION
 
-       Instead of animating, display
+       Show the final static state:
        Disability Belongs.
     ================================= */
 
@@ -959,9 +1036,14 @@
     }
 
 
+    /* =================================
+       DEFAULT STATE
+    ================================= */
+
     function showDefaultState() {
 
-      currentIndex = 0;
+      currentIndex =
+        0;
 
 
       currentEl.textContent =
@@ -990,6 +1072,10 @@
     }
 
 
+    /* =================================
+       RESPOND TO MOTION PREFERENCE
+    ================================= */
+
     function handleReducedMotion(event) {
 
       stopLoop();
@@ -999,12 +1085,14 @@
 
         showReducedMotionState();
 
+
         pauseBtn.hidden =
           true;
 
       } else {
 
         showDefaultState();
+
 
         pauseBtn.hidden =
           false;
@@ -1051,12 +1139,14 @@
 
       showReducedMotionState();
 
+
       pauseBtn.hidden =
         true;
 
     } else {
 
       showDefaultState();
+
 
       startLoop();
     }
