@@ -18,7 +18,7 @@
       --white: #FFFFFF;
 
       --main-size: clamp(38px, 5vw, 58px);
-      --subject-gap: 18px;
+      --subject-gap: 24px;
     }
 
 
@@ -84,7 +84,6 @@
        Final:
 
        Disability Belongs.
-
     ================================= */
 
     .message {
@@ -133,8 +132,8 @@
 
 
     /* =================================
-       NEW:
-       HIDE BE + BECOME ON FINAL FRAME
+       HIDE BE + BECOME
+       ON FINAL FRAME ONLY
     ================================= */
 
     .line-top,
@@ -187,7 +186,7 @@
 
       Disability Belongs.
 
-      Entire middle phrase is azure.
+      Entire middle phrase becomes azure.
     */
 
     .belong-wrap.final-blue,
@@ -396,7 +395,7 @@
         --main-size:
           clamp(28px, 7vw, 40px);
 
-        --subject-gap: 8px;
+        --subject-gap: 14px;
       }
 
 
@@ -456,7 +455,7 @@
         --main-size:
           clamp(26px, 7.5vw, 34px);
 
-        --subject-gap: 6px;
+        --subject-gap: 10px;
       }
 
 
@@ -543,10 +542,6 @@
     aria-label="Disability Belongs"
   >
 
-
-    <!--
-      Accessible static equivalent.
-    -->
 
     <p class="sr-only">
       Be. Belong. Become.
@@ -769,10 +764,6 @@
         frame.ending;
 
 
-      /*
-        FINAL FRAME
-      */
-
       if (
         currentIndex ===
         frames.length - 1
@@ -826,11 +817,6 @@
       nextEl.className =
         "subject next";
 
-
-      /*
-        Force browser layout before
-        applying transition classes.
-      */
 
       void nextEl.offsetWidth;
 
@@ -943,7 +929,6 @@
 
     /* =================================
        START LOOP
-
        ORIGINAL TIMING
     ================================= */
 
