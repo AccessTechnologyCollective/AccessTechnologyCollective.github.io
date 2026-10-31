@@ -21,9 +21,11 @@
       --subject-gap: 18px;
     }
 
+
     * {
       box-sizing: border-box;
     }
+
 
     html,
     body {
@@ -32,13 +34,18 @@
       margin: 0;
     }
 
+
     body {
       min-height: 100vh;
 
       background: var(--background);
       color: var(--white);
 
-      font-family: "URW DIN", Arial, sans-serif;
+      font-family:
+        "URW DIN",
+        Arial,
+        Helvetica,
+        sans-serif;
 
       overflow: hidden;
     }
@@ -69,13 +76,15 @@
 
 
     /* =================================
-       MESSAGE
+       ANIMATION AREA
 
              Be.
         I    Belong.
              Become.
 
-       Entire composition shifts together.
+       Then:
+
+        Disability Belongs.
     ================================= */
 
     .message {
@@ -91,8 +100,30 @@
 
       gap: 10px;
 
-      /* Move entire composition right */
       transform: translateX(32px);
+    }
+
+
+    /* =================================
+       OFFICIAL WHITE TAGLINE STACK
+    ================================= */
+
+    .logo-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      gap: 10px;
+
+      opacity: 1;
+
+      transition:
+        opacity 0.55s ease;
+    }
+
+
+    .logo-stack.logo-hidden {
+      opacity: 0;
     }
 
 
@@ -108,24 +139,37 @@
     }
 
 
+    /* =================================
+       WHITE TAGLINE FONT
+       OPTIMA
+    ================================= */
+
     .brand,
     .belong-wrap {
+      font-family:
+        Optima,
+        "Optima Nova",
+        "URW Classico",
+        serif;
+
       font-size: var(--main-size);
       line-height: 1;
 
-      font-weight: 600;
+      font-weight: 700;
 
       letter-spacing: -0.02em;
     }
 
 
-    .static-word {
+    .static-word,
+    .belong-wrap,
+    .belong-word {
       color: var(--white);
     }
 
 
     /* =================================
-       BELONG / BELONGS
+       MIDDLE LOGO LINE
     ================================= */
 
     .line-middle {
@@ -137,43 +181,16 @@
       display: inline-flex;
       align-items: baseline;
 
-      color: var(--white);
-
       white-space: nowrap;
     }
 
 
-    .belong-word,
-    .ending {
-      color: var(--white);
-    }
-
-
-    .ending {
-      display: inline;
-    }
-
-
-    /*
-      Final frame:
-      Disability Belongs.
-      becomes entirely blue.
-    */
-
-    .belong-wrap.final-blue,
-    .belong-wrap.final-blue .belong-word,
-    .belong-wrap.final-blue .ending {
-      color: var(--blue);
-    }
-
-
     /* =================================
-       ROTATING SUBJECT
+       ROTATING AZURE SUBJECT
 
        I
        You
        We
-       Disability
     ================================= */
 
     .subject-wrap {
@@ -197,6 +214,12 @@
 
       top: 0;
       right: 0;
+
+      font-family:
+        "URW DIN",
+        Arial,
+        Helvetica,
+        sans-serif;
 
       font-size: inherit;
       line-height: inherit;
@@ -245,8 +268,55 @@
 
 
     /* =================================
+       FINAL MESSAGE
+
+       Separate from the tagline.
+    ================================= */
+
+    .final-message {
+      position: absolute;
+
+      top: 50%;
+      left: 50%;
+
+      transform:
+        translate(-50%, -50%);
+
+      margin: 0;
+
+      font-family:
+        "URW DIN",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      color: var(--blue);
+
+      font-size: var(--main-size);
+      line-height: 1;
+
+      font-weight: 600;
+
+      letter-spacing: -0.02em;
+
+      white-space: nowrap;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition:
+        opacity 0.65s ease;
+    }
+
+
+    .final-message.visible {
+      opacity: 1;
+    }
+
+
+    /* =================================
        PAUSE / PLAY
-       Bottom-left
     ================================= */
 
     .controls {
@@ -282,6 +352,7 @@
       font-family:
         "URW DIN",
         Arial,
+        Helvetica,
         sans-serif;
 
       font-size: 13px;
@@ -309,7 +380,6 @@
 
     /* =================================
        SDCCD LOGO
-       Bottom-right
     ================================= */
 
     .district-logo {
@@ -478,13 +548,28 @@
 
     /* =================================
        REDUCED MOTION
+
+       Show only:
+       Disability Belongs.
     ================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
+      .logo-stack {
+        opacity: 0 !important;
+        transition: none !important;
+      }
+
+
       .subject {
         transition: none !important;
         transform: none !important;
+      }
+
+
+      .final-message {
+        opacity: 1 !important;
+        transition: none !important;
       }
 
 
@@ -524,56 +609,78 @@
     >
 
 
-      <!-- BE -->
+      <!-- =================================
+           WHITE TAGLINE
+      ================================= -->
 
-      <div class="line line-top">
-
-        <span class="brand static-word">
-          Be.
-        </span>
-
-      </div>
-
-
-      <!-- ROTATING SUBJECT + BELONG -->
-
-      <div class="line line-middle">
+      <div
+        id="logoStack"
+        class="logo-stack"
+      >
 
 
-        <span class="subject-wrap">
+        <!-- BE -->
 
-          <span class="subject current">
-            I
+        <div class="line line-top">
+
+          <span class="brand static-word">
+            Be.
           </span>
 
-          <span class="subject next"></span>
-
-        </span>
+        </div>
 
 
-        <span class="belong-wrap">
+        <!-- SUBJECT + BELONG -->
 
-          <span class="belong-word">
-            Belong
-          </span><span
-            id="ending"
-            class="ending"
-          >.</span>
+        <div class="line line-middle">
 
-        </span>
+
+          <span class="subject-wrap">
+
+            <span class="subject current">
+              I
+            </span>
+
+            <span class="subject next"></span>
+
+          </span>
+
+
+          <span class="belong-wrap">
+
+            <span class="belong-word">
+              Belong.
+            </span>
+
+          </span>
+
+
+        </div>
+
+
+        <!-- BECOME -->
+
+        <div class="line line-bottom">
+
+          <span class="brand static-word">
+            Become.
+          </span>
+
+        </div>
 
 
       </div>
 
 
-      <!-- BECOME -->
+      <!-- =================================
+           FINAL AZURE MESSAGE
+      ================================= -->
 
-      <div class="line line-bottom">
-
-        <span class="brand static-word">
-          Become.
-        </span>
-
+      <div
+        id="finalMessage"
+        class="final-message"
+      >
+        Disability Belongs.
       </div>
 
 
@@ -617,28 +724,10 @@
 
   <script>
 
-    const frames = [
-
-      {
-        subject: "I",
-        ending: "."
-      },
-
-      {
-        subject: "You",
-        ending: "."
-      },
-
-      {
-        subject: "We",
-        ending: "."
-      },
-
-      {
-        subject: "Disability",
-        ending: "s."
-      }
-
+    const subjects = [
+      "I",
+      "You",
+      "We"
     ];
 
 
@@ -654,15 +743,15 @@
       );
 
 
-    const endingEl =
+    const logoStack =
       document.querySelector(
-        "#ending"
+        "#logoStack"
       );
 
 
-    const belongWrap =
+    const finalMessage =
       document.querySelector(
-        ".belong-wrap"
+        "#finalMessage"
       );
 
 
@@ -686,48 +775,100 @@
 
     let animating = false;
 
+    let finalState = false;
+
+
+    const subjectDuration = 3200;
+
+    const finalDuration = 4200;
+
 
     /* =================================
-       DISPLAY CURRENT FRAME
+       CLEAR TIMER
     ================================= */
 
-    function renderCurrentFrame() {
+    function clearTimer() {
 
-      const frame =
-        frames[currentIndex];
+      if (timer !== null) {
 
+        clearTimeout(timer);
 
-      currentEl.textContent =
-        frame.subject;
-
-
-      endingEl.textContent =
-        frame.ending;
-
-
-      if (
-        currentIndex ===
-        frames.length - 1
-      ) {
-
-        belongWrap.classList.add(
-          "final-blue"
-        );
-
-      } else {
-
-        belongWrap.classList.remove(
-          "final-blue"
-        );
+        timer = null;
       }
     }
 
 
     /* =================================
-       ANIMATE TO NEXT FRAME
+       SCHEDULE NEXT STEP
     ================================= */
 
-    function animateTo(nextIndex) {
+    function scheduleNext(
+      callback,
+      delay
+    ) {
+
+      clearTimer();
+
+
+      if (
+        paused ||
+        reduceMotion.matches
+      ) {
+        return;
+      }
+
+
+      timer =
+        setTimeout(
+          callback,
+          delay
+        );
+    }
+
+
+    /* =================================
+       SHOW SUBJECT
+    ================================= */
+
+    function showSubject(index) {
+
+      currentIndex = index;
+
+      finalState = false;
+
+
+      logoStack.classList.remove(
+        "logo-hidden"
+      );
+
+
+      finalMessage.classList.remove(
+        "visible"
+      );
+
+
+      currentEl.textContent =
+        subjects[index];
+
+
+      currentEl.className =
+        "subject current";
+
+
+      nextEl.textContent =
+        "";
+
+
+      nextEl.className =
+        "subject next";
+    }
+
+
+    /* =================================
+       ANIMATE TO NEXT SUBJECT
+    ================================= */
+
+    function animateToSubject(nextIndex) {
 
       if (animating) {
         return;
@@ -737,12 +878,8 @@
       animating = true;
 
 
-      const nextFrame =
-        frames[nextIndex];
-
-
       nextEl.textContent =
-        nextFrame.subject;
+        subjects[nextIndex];
 
 
       nextEl.className =
@@ -762,32 +899,11 @@
       );
 
 
-      endingEl.textContent =
-        nextFrame.ending;
-
-
-      if (
-        nextIndex ===
-        frames.length - 1
-      ) {
-
-        belongWrap.classList.add(
-          "final-blue"
-        );
-
-      } else {
-
-        belongWrap.classList.remove(
-          "final-blue"
-        );
-      }
-
-
       setTimeout(
         () => {
 
           currentEl.textContent =
-            nextFrame.subject;
+            subjects[nextIndex];
 
 
           currentEl.className =
@@ -809,8 +925,52 @@
           animating =
             false;
 
+
+          scheduleNext(
+            advanceSequence,
+            subjectDuration
+          );
+
         },
         500
+      );
+    }
+
+
+    /* =================================
+       FINAL MESSAGE
+    ================================= */
+
+    function showFinalMessage() {
+
+      finalState = true;
+
+      animating = true;
+
+
+      logoStack.classList.add(
+        "logo-hidden"
+      );
+
+
+      setTimeout(
+        () => {
+
+          finalMessage.classList.add(
+            "visible"
+          );
+
+
+          animating = false;
+
+
+          scheduleNext(
+            restartSequence,
+            finalDuration
+          );
+
+        },
+        450
       );
     }
 
@@ -819,15 +979,101 @@
        ADVANCE
     ================================= */
 
-    function advanceFrame() {
+    function advanceSequence() {
 
-      const nextIndex =
-        (currentIndex + 1)
-        % frames.length;
+      if (
+        paused ||
+        reduceMotion.matches ||
+        animating
+      ) {
+        return;
+      }
 
 
-      animateTo(
-        nextIndex
+      if (currentIndex === 0) {
+
+        animateToSubject(1);
+
+        return;
+      }
+
+
+      if (currentIndex === 1) {
+
+        animateToSubject(2);
+
+        return;
+      }
+
+
+      if (currentIndex === 2) {
+
+        showFinalMessage();
+      }
+    }
+
+
+    /* =================================
+       RESTART
+    ================================= */
+
+    function restartSequence() {
+
+      if (
+        paused ||
+        reduceMotion.matches
+      ) {
+        return;
+      }
+
+
+      finalState = false;
+
+      animating = true;
+
+
+      finalMessage.classList.remove(
+        "visible"
+      );
+
+
+      setTimeout(
+        () => {
+
+          currentIndex = 0;
+
+
+          currentEl.textContent =
+            subjects[0];
+
+
+          currentEl.className =
+            "subject current";
+
+
+          nextEl.textContent =
+            "";
+
+
+          nextEl.className =
+            "subject next";
+
+
+          logoStack.classList.remove(
+            "logo-hidden"
+          );
+
+
+          animating = false;
+
+
+          scheduleNext(
+            advanceSequence,
+            subjectDuration
+          );
+
+        },
+        500
       );
     }
 
@@ -838,7 +1084,7 @@
 
     function startLoop() {
 
-      stopLoop();
+      clearTimer();
 
 
       if (
@@ -849,11 +1095,20 @@
       }
 
 
-      timer =
-        setInterval(
-          advanceFrame,
-          3200
+      if (finalState) {
+
+        scheduleNext(
+          restartSequence,
+          finalDuration
         );
+
+      } else {
+
+        scheduleNext(
+          advanceSequence,
+          subjectDuration
+        );
+      }
     }
 
 
@@ -863,12 +1118,7 @@
 
     function stopLoop() {
 
-      if (timer !== null) {
-
-        clearInterval(timer);
-
-        timer = null;
-      }
+      clearTimer();
     }
 
 
@@ -915,43 +1165,47 @@
 
     function showReducedMotionState() {
 
-      currentIndex =
-        frames.length - 1;
+      clearTimer();
 
 
-      currentEl.textContent =
-        frames[currentIndex].subject;
+      finalState = true;
+
+      animating = false;
 
 
-      currentEl.className =
-        "subject current";
-
-
-      nextEl.textContent =
-        "";
-
-
-      nextEl.className =
-        "subject next";
-
-
-      endingEl.textContent =
-        frames[currentIndex].ending;
-
-
-      belongWrap.classList.add(
-        "final-blue"
+      logoStack.classList.add(
+        "logo-hidden"
       );
+
+
+      finalMessage.classList.add(
+        "visible"
+      );
+
+
+      pauseBtn.hidden =
+        true;
     }
 
+
+    /* =================================
+       DEFAULT STATE
+    ================================= */
 
     function showDefaultState() {
 
+      clearTimer();
+
+
       currentIndex = 0;
+
+      finalState = false;
+
+      animating = false;
 
 
       currentEl.textContent =
-        frames[0].subject;
+        subjects[0];
 
 
       currentEl.className =
@@ -966,15 +1220,24 @@
         "subject next";
 
 
-      endingEl.textContent =
-        frames[0].ending;
-
-
-      belongWrap.classList.remove(
-        "final-blue"
+      finalMessage.classList.remove(
+        "visible"
       );
+
+
+      logoStack.classList.remove(
+        "logo-hidden"
+      );
+
+
+      pauseBtn.hidden =
+        false;
     }
 
+
+    /* =================================
+       MOTION PREFERENCE CHANGE
+    ================================= */
 
     function handleReducedMotion(event) {
 
@@ -985,15 +1248,9 @@
 
         showReducedMotionState();
 
-        pauseBtn.hidden =
-          true;
-
       } else {
 
         showDefaultState();
-
-        pauseBtn.hidden =
-          false;
 
 
         if (!paused) {
@@ -1036,9 +1293,6 @@
     ) {
 
       showReducedMotionState();
-
-      pauseBtn.hidden =
-        true;
 
     } else {
 
