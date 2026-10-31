@@ -21,9 +21,11 @@
       --subject-gap: 18px;
     }
 
+
     * {
       box-sizing: border-box;
     }
+
 
     html,
     body {
@@ -32,13 +34,17 @@
       margin: 0;
     }
 
+
     body {
       min-height: 100vh;
 
       background: var(--background);
       color: var(--white);
 
-      font-family: "URW DIN", Arial, sans-serif;
+      font-family:
+        "URW DIN",
+        Arial,
+        sans-serif;
 
       overflow: hidden;
     }
@@ -75,7 +81,10 @@
         I    Belong.
              Become.
 
-       Entire composition shifts together.
+       Final:
+
+       Disability Belongs.
+
     ================================= */
 
     .message {
@@ -91,7 +100,6 @@
 
       gap: 10px;
 
-      /* Move entire composition right */
       transform: translateX(32px);
     }
 
@@ -121,6 +129,26 @@
 
     .static-word {
       color: var(--white);
+    }
+
+
+    /* =================================
+       NEW:
+       HIDE BE + BECOME ON FINAL FRAME
+    ================================= */
+
+    .line-top,
+    .line-bottom {
+      opacity: 1;
+
+      transition:
+        opacity 0.35s ease;
+    }
+
+
+    .message.final-frame .line-top,
+    .message.final-frame .line-bottom {
+      opacity: 0;
     }
 
 
@@ -156,8 +184,10 @@
 
     /*
       Final frame:
+
       Disability Belongs.
-      becomes entirely blue.
+
+      Entire middle phrase is azure.
     */
 
     .belong-wrap.final-blue,
@@ -478,6 +508,9 @@
 
     /* =================================
        REDUCED MOTION
+
+       Show final static state:
+       Disability Belongs.
     ================================= */
 
     @media (prefers-reduced-motion: reduce) {
@@ -485,6 +518,12 @@
       .subject {
         transition: none !important;
         transform: none !important;
+      }
+
+
+      .line-top,
+      .line-bottom {
+        transition: none !important;
       }
 
 
@@ -505,6 +544,10 @@
   >
 
 
+    <!--
+      Accessible static equivalent.
+    -->
+
     <p class="sr-only">
       Be. Belong. Become.
       I belong.
@@ -519,6 +562,7 @@
     ================================= -->
 
     <div
+      id="message"
       class="message"
       aria-hidden="true"
     >
@@ -617,6 +661,20 @@
 
   <script>
 
+    /*
+      ORIGINAL SEQUENCE:
+
+      I Belong.
+      You Belong.
+      We Belong.
+      Disability Belongs.
+
+      Only difference:
+
+      Be. and Become. disappear
+      during Disability Belongs.
+    */
+
     const frames = [
 
       {
@@ -640,6 +698,12 @@
       }
 
     ];
+
+
+    const messageEl =
+      document.querySelector(
+        "#message"
+      );
 
 
     const currentEl =
@@ -705,6 +769,10 @@
         frame.ending;
 
 
+      /*
+        FINAL FRAME
+      */
+
       if (
         currentIndex ===
         frames.length - 1
@@ -714,10 +782,20 @@
           "final-blue"
         );
 
+
+        messageEl.classList.add(
+          "final-frame"
+        );
+
       } else {
 
         belongWrap.classList.remove(
           "final-blue"
+        );
+
+
+        messageEl.classList.remove(
+          "final-frame"
         );
       }
     }
@@ -749,6 +827,11 @@
         "subject next";
 
 
+      /*
+        Force browser layout before
+        applying transition classes.
+      */
+
       void nextEl.offsetWidth;
 
 
@@ -762,9 +845,23 @@
       );
 
 
+      /*
+        Belong.
+        becomes Belongs.
+        on Disability frame.
+      */
+
       endingEl.textContent =
         nextFrame.ending;
 
+
+      /*
+        FINAL FRAME:
+
+        Disability Belongs. = azure
+
+        Be. + Become. disappear.
+      */
 
       if (
         nextIndex ===
@@ -775,16 +872,27 @@
           "final-blue"
         );
 
+
+        messageEl.classList.add(
+          "final-frame"
+        );
+
       } else {
 
         belongWrap.classList.remove(
           "final-blue"
+        );
+
+
+        messageEl.classList.remove(
+          "final-frame"
         );
       }
 
 
       setTimeout(
         () => {
+
 
           currentEl.textContent =
             nextFrame.subject;
@@ -809,6 +917,7 @@
           animating =
             false;
 
+
         },
         500
       );
@@ -816,7 +925,7 @@
 
 
     /* =================================
-       ADVANCE
+       ADVANCE FRAME
     ================================= */
 
     function advanceFrame() {
@@ -833,7 +942,9 @@
 
 
     /* =================================
-       START
+       START LOOP
+
+       ORIGINAL TIMING
     ================================= */
 
     function startLoop() {
@@ -858,7 +969,7 @@
 
 
     /* =================================
-       STOP
+       STOP LOOP
     ================================= */
 
     function stopLoop() {
@@ -879,6 +990,7 @@
     pauseBtn.addEventListener(
       "click",
       () => {
+
 
         paused =
           !paused;
@@ -911,6 +1023,9 @@
 
     /* =================================
        REDUCED MOTION
+
+       Static:
+       Disability Belongs.
     ================================= */
 
     function showReducedMotionState() {
@@ -942,8 +1057,17 @@
       belongWrap.classList.add(
         "final-blue"
       );
+
+
+      messageEl.classList.add(
+        "final-frame"
+      );
     }
 
+
+    /* =================================
+       DEFAULT STATE
+    ================================= */
 
     function showDefaultState() {
 
@@ -973,8 +1097,17 @@
       belongWrap.classList.remove(
         "final-blue"
       );
+
+
+      messageEl.classList.remove(
+        "final-frame"
+      );
     }
 
+
+    /* =================================
+       MOTION PREFERENCE CHANGE
+    ================================= */
 
     function handleReducedMotion(event) {
 
@@ -985,12 +1118,14 @@
 
         showReducedMotionState();
 
+
         pauseBtn.hidden =
           true;
 
       } else {
 
         showDefaultState();
+
 
         pauseBtn.hidden =
           false;
@@ -1037,12 +1172,14 @@
 
       showReducedMotionState();
 
+
       pauseBtn.hidden =
         true;
 
     } else {
 
       showDefaultState();
+
 
       startLoop();
     }
