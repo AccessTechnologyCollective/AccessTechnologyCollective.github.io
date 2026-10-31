@@ -83,7 +83,7 @@
 
        Final:
 
-       Disability Belongs.
+       Disability Belongs. at SDCCD
     ================================= */
 
     .message {
@@ -181,16 +181,36 @@
     }
 
 
+    /* =================================
+       AT SDCCD
+       FINAL FRAME ONLY
+    ================================= */
+
+    .at-sdccd {
+      display: none;
+
+      color: var(--white);
+
+      margin-left: 0.28em;
+    }
+
+
+    .message.final-frame .at-sdccd {
+      display: inline;
+    }
+
+
     /*
       Final frame:
 
       Disability = azure
-      Belongs. = white
+      Belongs. at SDCCD = white
     */
 
     .belong-wrap.final-blue,
     .belong-wrap.final-blue .belong-word,
-    .belong-wrap.final-blue .ending {
+    .belong-wrap.final-blue .ending,
+    .belong-wrap.final-blue .at-sdccd {
       color: var(--white);
     }
 
@@ -353,7 +373,7 @@
     .district-logo img {
       display: block;
 
-      width: 120px;
+      width: 110px;
       max-width: 32vw;
 
       height: auto;
@@ -508,7 +528,7 @@
        REDUCED MOTION
 
        Show final static state:
-       Disability Belongs.
+       Disability Belongs. at SDCCD
     ================================= */
 
     @media (prefers-reduced-motion: reduce) {
@@ -547,7 +567,7 @@
       I belong.
       You belong.
       We belong.
-      Disability belongs.
+      Disability belongs at SDCCD.
     </p>
 
 
@@ -596,7 +616,9 @@
           </span><span
             id="ending"
             class="ending"
-          >.</span>
+          >.</span><span
+            class="at-sdccd"
+          >at SDCCD</span>
 
         </span>
 
@@ -661,13 +683,13 @@
       I Belong.
       You Belong.
       We Belong.
-      Disability Belongs.
+      Disability Belongs. at SDCCD
 
       On final frame only:
       Be. and Become. disappear.
 
       Disability = azure
-      Belongs. = white
+      Belongs. at SDCCD = white
     */
 
     const frames = [
@@ -850,7 +872,7 @@
         FINAL FRAME:
 
         Disability = azure
-        Belongs. = white
+        Belongs. at SDCCD = white
 
         Be. + Become. disappear.
       */
@@ -1016,7 +1038,7 @@
        REDUCED MOTION
 
        Static:
-       Disability Belongs.
+       Disability Belongs. at SDCCD
     ================================= */
 
     function showReducedMotionState() {
@@ -1148,6 +1170,7 @@
     ) {
 
       reduceMotion.addListener(
+        "change",
         handleReducedMotion
       );
     }
