@@ -83,7 +83,9 @@
 
        Final:
 
-       Disability Belongs.
+       Disability.
+       Belongs.
+       at SDCCD.
     ================================= */
 
     .message {
@@ -116,7 +118,8 @@
 
 
     .brand,
-    .belong-wrap {
+    .belong-wrap,
+    .final-line {
       font-size: var(--main-size);
       line-height: 1;
 
@@ -132,27 +135,20 @@
 
 
     /* =================================
-       HIDE BE + BECOME
-       ON FINAL FRAME ONLY
+       STANDARD LOGO STATE
     ================================= */
 
-    .line-top,
-    .line-bottom {
-      opacity: 1;
+    .standard-state {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
 
-      transition:
-        opacity 0.35s ease;
-    }
-
-
-    .message.final-frame .line-top,
-    .message.final-frame .line-bottom {
-      opacity: 0;
+      gap: 10px;
     }
 
 
     /* =================================
-       BELONG / BELONGS
+       BELONG
     ================================= */
 
     .line-middle {
@@ -170,27 +166,7 @@
     }
 
 
-    .belong-word,
-    .ending {
-      color: var(--white);
-    }
-
-
-    .ending {
-      display: inline;
-    }
-
-
-    /*
-      Final frame:
-
-      Disability = azure
-      Belongs. = white
-    */
-
-    .belong-wrap.final-blue,
-    .belong-wrap.final-blue .belong-word,
-    .belong-wrap.final-blue .ending {
+    .belong-word {
       color: var(--white);
     }
 
@@ -201,7 +177,6 @@
        I
        You
        We
-       Disability
     ================================= */
 
     .subject-wrap {
@@ -269,6 +244,79 @@
       transition:
         opacity 0.35s ease,
         transform 0.35s ease;
+    }
+
+
+    /* =================================
+       FINAL STACKED STATE
+
+       Disability.
+       Belongs.
+       at SDCCD.
+    ================================= */
+
+    .final-state {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      gap: 10px;
+
+      opacity: 0;
+
+      pointer-events: none;
+    }
+
+
+    .final-line {
+      margin: 0;
+      padding: 0;
+
+      white-space: nowrap;
+    }
+
+
+    .final-disability,
+    .final-sdccd {
+      color: var(--blue);
+    }
+
+
+    .final-belongs {
+      color: var(--white);
+    }
+
+
+    /* =================================
+       SWITCH BETWEEN STATES
+    ================================= */
+
+    .standard-state {
+      opacity: 1;
+
+      transition:
+        opacity 0.35s ease;
+    }
+
+
+    .final-state {
+      transition:
+        opacity 0.35s ease;
+    }
+
+
+    .message.final-frame .standard-state {
+      opacity: 0;
+    }
+
+
+    .message.final-frame .final-state {
+      opacity: 1;
     }
 
 
@@ -467,7 +515,7 @@
 
 
       .message {
-        transform: translateX(25px);
+        transform: translateX(27px);
       }
 
 
@@ -508,7 +556,9 @@
        REDUCED MOTION
 
        Show final static state:
-       Disability Belongs.
+       Disability.
+       Belongs.
+       at SDCCD.
     ================================= */
 
     @media (prefers-reduced-motion: reduce) {
@@ -519,8 +569,14 @@
       }
 
 
-      .line-top,
-      .line-bottom {
+      .standard-state {
+        opacity: 0 !important;
+        transition: none !important;
+      }
+
+
+      .final-state {
+        opacity: 1 !important;
         transition: none !important;
       }
 
@@ -547,7 +603,7 @@
       I belong.
       You belong.
       We belong.
-      Disability belongs.
+      Disability belongs at SDCCD.
     </p>
 
 
@@ -562,55 +618,83 @@
     >
 
 
-      <!-- BE -->
+      <!-- =================================
+           NORMAL I / YOU / WE STATE
+      ================================= -->
 
-      <div class="line line-top">
-
-        <span class="brand static-word">
-          Be.
-        </span>
-
-      </div>
+      <div class="standard-state">
 
 
-      <!-- ROTATING SUBJECT + BELONG -->
+        <!-- BE -->
 
-      <div class="line line-middle">
+        <div class="line line-top">
 
-
-        <span class="subject-wrap">
-
-          <span class="subject current">
-            I
+          <span class="brand static-word">
+            Be.
           </span>
 
-          <span class="subject next"></span>
-
-        </span>
+        </div>
 
 
-        <span class="belong-wrap">
+        <!-- SUBJECT + BELONG -->
 
-          <span class="belong-word">
-            Belong
-          </span><span
-            id="ending"
-            class="ending"
-          >.</span>
+        <div class="line line-middle">
 
-        </span>
+
+          <span class="subject-wrap">
+
+            <span class="subject current">
+              I
+            </span>
+
+            <span class="subject next"></span>
+
+          </span>
+
+
+          <span class="belong-wrap">
+
+            <span class="belong-word">
+              Belong.
+            </span>
+
+          </span>
+
+
+        </div>
+
+
+        <!-- BECOME -->
+
+        <div class="line line-bottom">
+
+          <span class="brand static-word">
+            Become.
+          </span>
+
+        </div>
 
 
       </div>
 
 
-      <!-- BECOME -->
+      <!-- =================================
+           FINAL STACKED STATE
+      ================================= -->
 
-      <div class="line line-bottom">
+      <div class="final-state">
 
-        <span class="brand static-word">
-          Become.
-        </span>
+        <div class="final-line final-disability">
+          Disability.
+        </div>
+
+        <div class="final-line final-belongs">
+          Belongs.
+        </div>
+
+        <div class="final-line final-sdccd">
+          at SDCCD.
+        </div>
 
       </div>
 
@@ -661,35 +745,36 @@
       I Belong.
       You Belong.
       We Belong.
-      Disability Belongs.
 
-      On final frame only:
-      Be. and Become. disappear.
+      Then:
 
-      Disability = azure
-      Belongs. = white
+      Disability.
+      Belongs.
+      at SDCCD.
+
+      Timing remains 3200ms.
     */
 
     const frames = [
 
       {
         subject: "I",
-        ending: "."
+        final: false
       },
 
       {
         subject: "You",
-        ending: "."
+        final: false
       },
 
       {
         subject: "We",
-        ending: "."
+        final: false
       },
 
       {
-        subject: "Disability",
-        ending: "s."
+        subject: "",
+        final: true
       }
 
     ];
@@ -710,18 +795,6 @@
     const nextEl =
       document.querySelector(
         ".subject.next"
-      );
-
-
-    const endingEl =
-      document.querySelector(
-        "#ending"
-      );
-
-
-    const belongWrap =
-      document.querySelector(
-        ".belong-wrap"
       );
 
 
@@ -756,23 +829,7 @@
         frames[currentIndex];
 
 
-      currentEl.textContent =
-        frame.subject;
-
-
-      endingEl.textContent =
-        frame.ending;
-
-
-      if (
-        currentIndex ===
-        frames.length - 1
-      ) {
-
-        belongWrap.classList.add(
-          "final-blue"
-        );
-
+      if (frame.final) {
 
         messageEl.classList.add(
           "final-frame"
@@ -780,14 +837,13 @@
 
       } else {
 
-        belongWrap.classList.remove(
-          "final-blue"
-        );
-
-
         messageEl.classList.remove(
           "final-frame"
         );
+
+
+        currentEl.textContent =
+          frame.subject;
       }
     }
 
@@ -809,6 +865,100 @@
       const nextFrame =
         frames[nextIndex];
 
+
+      /* =================================
+         GOING TO FINAL FRAME
+      ================================= */
+
+      if (nextFrame.final) {
+
+        currentEl.classList.add(
+          "exit"
+        );
+
+
+        messageEl.classList.add(
+          "final-frame"
+        );
+
+
+        setTimeout(
+          () => {
+
+
+            currentEl.className =
+              "subject current";
+
+
+            currentIndex =
+              nextIndex;
+
+
+            animating =
+              false;
+
+
+          },
+          500
+        );
+
+
+        return;
+      }
+
+
+      /* =================================
+         COMING FROM FINAL FRAME
+      ================================= */
+
+      if (
+        frames[currentIndex].final
+      ) {
+
+        messageEl.classList.remove(
+          "final-frame"
+        );
+
+
+        currentEl.textContent =
+          nextFrame.subject;
+
+
+        currentEl.className =
+          "subject current";
+
+
+        nextEl.textContent =
+          "";
+
+
+        nextEl.className =
+          "subject next";
+
+
+        currentIndex =
+          nextIndex;
+
+
+        setTimeout(
+          () => {
+
+            animating =
+              false;
+
+          },
+          500
+        );
+
+
+        return;
+      }
+
+
+      /* =================================
+         NORMAL I -> YOU -> WE
+         ANIMATION
+      ================================= */
 
       nextEl.textContent =
         nextFrame.subject;
@@ -834,52 +984,6 @@
       nextEl.classList.add(
         "enter"
       );
-
-
-      /*
-        Belong.
-        becomes Belongs.
-        on Disability frame.
-      */
-
-      endingEl.textContent =
-        nextFrame.ending;
-
-
-      /*
-        FINAL FRAME:
-
-        Disability = azure
-        Belongs. = white
-
-        Be. + Become. disappear.
-      */
-
-      if (
-        nextIndex ===
-        frames.length - 1
-      ) {
-
-        belongWrap.classList.add(
-          "final-blue"
-        );
-
-
-        messageEl.classList.add(
-          "final-frame"
-        );
-
-      } else {
-
-        belongWrap.classList.remove(
-          "final-blue"
-        );
-
-
-        messageEl.classList.remove(
-          "final-frame"
-        );
-      }
 
 
       setTimeout(
@@ -1015,39 +1119,13 @@
     /* =================================
        REDUCED MOTION
 
-       Static:
-       Disability Belongs.
+       Static final frame.
     ================================= */
 
     function showReducedMotionState() {
 
       currentIndex =
         frames.length - 1;
-
-
-      currentEl.textContent =
-        frames[currentIndex].subject;
-
-
-      currentEl.className =
-        "subject current";
-
-
-      nextEl.textContent =
-        "";
-
-
-      nextEl.className =
-        "subject next";
-
-
-      endingEl.textContent =
-        frames[currentIndex].ending;
-
-
-      belongWrap.classList.add(
-        "final-blue"
-      );
 
 
       messageEl.classList.add(
@@ -1065,6 +1143,11 @@
       currentIndex = 0;
 
 
+      messageEl.classList.remove(
+        "final-frame"
+      );
+
+
       currentEl.textContent =
         frames[0].subject;
 
@@ -1079,20 +1162,6 @@
 
       nextEl.className =
         "subject next";
-
-
-      endingEl.textContent =
-        frames[0].ending;
-
-
-      belongWrap.classList.remove(
-        "final-blue"
-      );
-
-
-      messageEl.classList.remove(
-        "final-frame"
-      );
     }
 
 
