@@ -18,7 +18,7 @@
       --white: #FFFFFF;
 
       --main-size: clamp(38px, 5vw, 58px);
-      --subject-gap: 24px;
+      --subject-gap: 30px;
     }
 
 
@@ -184,15 +184,14 @@
     /*
       Final frame:
 
-      Disability Belongs.
-
-      Entire middle phrase becomes azure.
+      Disability = azure
+      Belongs. = white
     */
 
     .belong-wrap.final-blue,
     .belong-wrap.final-blue .belong-word,
     .belong-wrap.final-blue .ending {
-      color: var(--blue);
+      color: var(--white);
     }
 
 
@@ -395,7 +394,7 @@
         --main-size:
           clamp(28px, 7vw, 40px);
 
-        --subject-gap: 14px;
+        --subject-gap: 18px;
       }
 
 
@@ -455,7 +454,7 @@
         --main-size:
           clamp(26px, 7.5vw, 34px);
 
-        --subject-gap: 10px;
+        --subject-gap: 12px;
       }
 
 
@@ -657,17 +656,18 @@
   <script>
 
     /*
-      ORIGINAL SEQUENCE:
+      SEQUENCE:
 
       I Belong.
       You Belong.
       We Belong.
       Disability Belongs.
 
-      Only difference:
+      On final frame only:
+      Be. and Become. disappear.
 
-      Be. and Become. disappear
-      during Disability Belongs.
+      Disability = azure
+      Belongs. = white
     */
 
     const frames = [
@@ -818,6 +818,11 @@
         "subject next";
 
 
+      /*
+        Force browser layout before
+        applying transition classes.
+      */
+
       void nextEl.offsetWidth;
 
 
@@ -844,7 +849,8 @@
       /*
         FINAL FRAME:
 
-        Disability Belongs. = azure
+        Disability = azure
+        Belongs. = white
 
         Be. + Become. disappear.
       */
