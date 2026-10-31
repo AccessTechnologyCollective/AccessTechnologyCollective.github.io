@@ -44,7 +44,6 @@
       font-family:
         "URW DIN",
         Arial,
-        Helvetica,
         sans-serif;
 
       overflow: hidden;
@@ -100,12 +99,16 @@
 
       gap: 10px;
 
+      /*
+        Keep the existing overall
+        composition position.
+      */
       transform: translateX(32px);
     }
 
 
     /* =================================
-       OFFICIAL WHITE TAGLINE STACK
+       OFFICIAL WHITE LOGO STACK
     ================================= */
 
     .logo-stack {
@@ -139,23 +142,12 @@
     }
 
 
-    /* =================================
-       WHITE TAGLINE FONT
-       OPTIMA
-    ================================= */
-
     .brand,
     .belong-wrap {
-      font-family:
-        Optima,
-        "Optima Nova",
-        "URW Classico",
-        serif;
-
       font-size: var(--main-size);
       line-height: 1;
 
-      font-weight: 700;
+      font-weight: 600;
 
       letter-spacing: -0.02em;
     }
@@ -215,12 +207,6 @@
       top: 0;
       right: 0;
 
-      font-family:
-        "URW DIN",
-        Arial,
-        Helvetica,
-        sans-serif;
-
       font-size: inherit;
       line-height: inherit;
 
@@ -270,7 +256,9 @@
     /* =================================
        FINAL MESSAGE
 
-       Separate from the tagline.
+       Separate from the logo.
+
+       Disability Belongs.
     ================================= */
 
     .final-message {
@@ -283,12 +271,6 @@
         translate(-50%, -50%);
 
       margin: 0;
-
-      font-family:
-        "URW DIN",
-        Arial,
-        Helvetica,
-        sans-serif;
 
       color: var(--blue);
 
@@ -317,6 +299,7 @@
 
     /* =================================
        PAUSE / PLAY
+       Bottom-left
     ================================= */
 
     .controls {
@@ -352,7 +335,6 @@
       font-family:
         "URW DIN",
         Arial,
-        Helvetica,
         sans-serif;
 
       font-size: 13px;
@@ -380,6 +362,7 @@
 
     /* =================================
        SDCCD LOGO
+       Bottom-right
     ================================= */
 
     .district-logo {
@@ -590,6 +573,14 @@
   >
 
 
+    <!--
+      Accessible static equivalent.
+
+      The visual animation is hidden from
+      assistive technology so the changing
+      words are not repeatedly announced.
+    -->
+
     <p class="sr-only">
       Be. Belong. Become.
       I belong.
@@ -610,7 +601,7 @@
 
 
       <!-- =================================
-           WHITE TAGLINE
+           OFFICIAL WHITE LOGO
       ================================= -->
 
       <div
@@ -674,6 +665,8 @@
 
       <!-- =================================
            FINAL AZURE MESSAGE
+
+           Completely separate from logo.
       ================================= -->
 
       <div
@@ -723,6 +716,18 @@
 
 
   <script>
+
+    /* =================================
+       SUBJECT SEQUENCE
+
+       Official logo remains unchanged:
+
+       Be.
+       Belong.
+       Become.
+
+       Only the azure subject changes.
+    ================================= */
 
     const subjects = [
       "I",
@@ -778,7 +783,20 @@
     let finalState = false;
 
 
+    /*
+      Timing.
+
+      I / You / We each remain visible
+      for this amount of time.
+    */
+
     const subjectDuration = 3200;
+
+
+    /*
+      Disability Belongs. remains visible
+      slightly longer before looping.
+    */
 
     const finalDuration = 4200;
 
@@ -827,7 +845,7 @@
 
 
     /* =================================
-       SHOW SUBJECT
+       SHOW CURRENT SUBJECT
     ================================= */
 
     function showSubject(index) {
@@ -886,6 +904,11 @@
         "subject next";
 
 
+      /*
+        Force browser layout so
+        transition classes animate.
+      */
+
       void nextEl.offsetWidth;
 
 
@@ -938,7 +961,16 @@
 
 
     /* =================================
-       FINAL MESSAGE
+       SHOW FINAL MESSAGE
+
+       Fade away:
+       Be.
+       Belong.
+       Become.
+       We
+
+       Then fade in:
+       Disability Belongs.
     ================================= */
 
     function showFinalMessage() {
@@ -948,10 +980,21 @@
       animating = true;
 
 
+      /*
+        Fade the complete white logo stack
+        and azure subject out together.
+      */
+
       logoStack.classList.add(
         "logo-hidden"
       );
 
+
+      /*
+        Allow the logo fade to begin,
+        then bring in the separate
+        final azure statement.
+      */
 
       setTimeout(
         () => {
@@ -976,7 +1019,7 @@
 
 
     /* =================================
-       ADVANCE
+       ADVANCE SEQUENCE
     ================================= */
 
     function advanceSequence() {
@@ -990,6 +1033,10 @@
       }
 
 
+      /*
+        I -> You
+      */
+
       if (currentIndex === 0) {
 
         animateToSubject(1);
@@ -998,6 +1045,10 @@
       }
 
 
+      /*
+        You -> We
+      */
+
       if (currentIndex === 1) {
 
         animateToSubject(2);
@@ -1005,6 +1056,10 @@
         return;
       }
 
+
+      /*
+        We -> Disability Belongs.
+      */
 
       if (currentIndex === 2) {
 
@@ -1015,6 +1070,12 @@
 
     /* =================================
        RESTART
+
+       Disability Belongs.
+       fades out first.
+
+       Then the original white logo
+       returns with I.
     ================================= */
 
     function restartSequence() {
@@ -1079,7 +1140,7 @@
 
 
     /* =================================
-       START
+       START LOOP
     ================================= */
 
     function startLoop() {
@@ -1094,6 +1155,11 @@
         return;
       }
 
+
+      /*
+        Resume from whichever visual
+        state is currently displayed.
+      */
 
       if (finalState) {
 
@@ -1113,7 +1179,7 @@
 
 
     /* =================================
-       STOP
+       STOP LOOP
     ================================= */
 
     function stopLoop() {
@@ -1161,6 +1227,10 @@
 
     /* =================================
        REDUCED MOTION
+
+       Show only the final static phrase:
+
+       Disability Belongs.
     ================================= */
 
     function showReducedMotionState() {
@@ -1190,6 +1260,10 @@
 
     /* =================================
        DEFAULT STATE
+
+             Be.
+        I    Belong.
+             Become.
     ================================= */
 
     function showDefaultState() {
@@ -1236,7 +1310,7 @@
 
 
     /* =================================
-       MOTION PREFERENCE CHANGE
+       RESPOND TO MOTION PREFERENCE
     ================================= */
 
     function handleReducedMotion(event) {
