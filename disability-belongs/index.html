@@ -21,11 +21,9 @@
       --subject-gap: 18px;
     }
 
-
     * {
       box-sizing: border-box;
     }
-
 
     html,
     body {
@@ -34,17 +32,13 @@
       margin: 0;
     }
 
-
     body {
       min-height: 100vh;
 
       background: var(--background);
       color: var(--white);
 
-      font-family:
-        "URW DIN",
-        Arial,
-        sans-serif;
+      font-family: "URW DIN", Arial, sans-serif;
 
       overflow: hidden;
     }
@@ -75,15 +69,13 @@
 
 
     /* =================================
-       ANIMATION AREA
+       MESSAGE
 
              Be.
         I    Belong.
              Become.
 
-       Then:
-
-        Disability Belongs.
+       Entire composition shifts together.
     ================================= */
 
     .message {
@@ -99,34 +91,8 @@
 
       gap: 10px;
 
-      /*
-        Keep the existing overall
-        composition position.
-      */
+      /* Move entire composition right */
       transform: translateX(32px);
-    }
-
-
-    /* =================================
-       OFFICIAL WHITE LOGO STACK
-    ================================= */
-
-    .logo-stack {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      gap: 10px;
-
-      opacity: 1;
-
-      transition:
-        opacity 0.55s ease;
-    }
-
-
-    .logo-stack.logo-hidden {
-      opacity: 0;
     }
 
 
@@ -153,15 +119,13 @@
     }
 
 
-    .static-word,
-    .belong-wrap,
-    .belong-word {
+    .static-word {
       color: var(--white);
     }
 
 
     /* =================================
-       MIDDLE LOGO LINE
+       BELONG / BELONGS
     ================================= */
 
     .line-middle {
@@ -173,16 +137,43 @@
       display: inline-flex;
       align-items: baseline;
 
+      color: var(--white);
+
       white-space: nowrap;
     }
 
 
+    .belong-word,
+    .ending {
+      color: var(--white);
+    }
+
+
+    .ending {
+      display: inline;
+    }
+
+
+    /*
+      Final frame:
+      Disability Belongs.
+      becomes entirely blue.
+    */
+
+    .belong-wrap.final-blue,
+    .belong-wrap.final-blue .belong-word,
+    .belong-wrap.final-blue .ending {
+      color: var(--blue);
+    }
+
+
     /* =================================
-       ROTATING AZURE SUBJECT
+       ROTATING SUBJECT
 
        I
        You
        We
+       Disability
     ================================= */
 
     .subject-wrap {
@@ -250,50 +241,6 @@
       transition:
         opacity 0.35s ease,
         transform 0.35s ease;
-    }
-
-
-    /* =================================
-       FINAL MESSAGE
-
-       Separate from the logo.
-
-       Disability Belongs.
-    ================================= */
-
-    .final-message {
-      position: absolute;
-
-      top: 50%;
-      left: 50%;
-
-      transform:
-        translate(-50%, -50%);
-
-      margin: 0;
-
-      color: var(--blue);
-
-      font-size: var(--main-size);
-      line-height: 1;
-
-      font-weight: 600;
-
-      letter-spacing: -0.02em;
-
-      white-space: nowrap;
-
-      opacity: 0;
-
-      pointer-events: none;
-
-      transition:
-        opacity 0.65s ease;
-    }
-
-
-    .final-message.visible {
-      opacity: 1;
     }
 
 
@@ -531,28 +478,13 @@
 
     /* =================================
        REDUCED MOTION
-
-       Show only:
-       Disability Belongs.
     ================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
-      .logo-stack {
-        opacity: 0 !important;
-        transition: none !important;
-      }
-
-
       .subject {
         transition: none !important;
         transform: none !important;
-      }
-
-
-      .final-message {
-        opacity: 1 !important;
-        transition: none !important;
       }
 
 
@@ -573,14 +505,6 @@
   >
 
 
-    <!--
-      Accessible static equivalent.
-
-      The visual animation is hidden from
-      assistive technology so the changing
-      words are not repeatedly announced.
-    -->
-
     <p class="sr-only">
       Be. Belong. Become.
       I belong.
@@ -600,80 +524,56 @@
     >
 
 
-      <!-- =================================
-           OFFICIAL WHITE LOGO
-      ================================= -->
+      <!-- BE -->
 
-      <div
-        id="logoStack"
-        class="logo-stack"
-      >
+      <div class="line line-top">
+
+        <span class="brand static-word">
+          Be.
+        </span>
+
+      </div>
 
 
-        <!-- BE -->
+      <!-- ROTATING SUBJECT + BELONG -->
 
-        <div class="line line-top">
+      <div class="line line-middle">
 
-          <span class="brand static-word">
-            Be.
+
+        <span class="subject-wrap">
+
+          <span class="subject current">
+            I
           </span>
 
-        </div>
+          <span class="subject next"></span>
+
+        </span>
 
 
-        <!-- SUBJECT + BELONG -->
+        <span class="belong-wrap">
 
-        <div class="line line-middle">
+          <span class="belong-word">
+            Belong
+          </span><span
+            id="ending"
+            class="ending"
+          >.</span>
 
-
-          <span class="subject-wrap">
-
-            <span class="subject current">
-              I
-            </span>
-
-            <span class="subject next"></span>
-
-          </span>
-
-
-          <span class="belong-wrap">
-
-            <span class="belong-word">
-              Belong.
-            </span>
-
-          </span>
-
-
-        </div>
-
-
-        <!-- BECOME -->
-
-        <div class="line line-bottom">
-
-          <span class="brand static-word">
-            Become.
-          </span>
-
-        </div>
+        </span>
 
 
       </div>
 
 
-      <!-- =================================
-           FINAL AZURE MESSAGE
+      <!-- BECOME -->
 
-           Completely separate from logo.
-      ================================= -->
+      <div class="line line-bottom">
 
-      <div
-        id="finalMessage"
-        class="final-message"
-      >
-        Disability Belongs.
+        <span class="brand static-word">
+          Become.
+        </span>
+
       </div>
 
 
@@ -717,22 +617,28 @@
 
   <script>
 
-    /* =================================
-       SUBJECT SEQUENCE
+    const frames = [
 
-       Official logo remains unchanged:
+      {
+        subject: "I",
+        ending: "."
+      },
 
-       Be.
-       Belong.
-       Become.
+      {
+        subject: "You",
+        ending: "."
+      },
 
-       Only the azure subject changes.
-    ================================= */
+      {
+        subject: "We",
+        ending: "."
+      },
 
-    const subjects = [
-      "I",
-      "You",
-      "We"
+      {
+        subject: "Disability",
+        ending: "s."
+      }
+
     ];
 
 
@@ -748,15 +654,15 @@
       );
 
 
-    const logoStack =
+    const endingEl =
       document.querySelector(
-        "#logoStack"
+        "#ending"
       );
 
 
-    const finalMessage =
+    const belongWrap =
       document.querySelector(
-        "#finalMessage"
+        ".belong-wrap"
       );
 
 
@@ -780,113 +686,48 @@
 
     let animating = false;
 
-    let finalState = false;
-
-
-    /*
-      Timing.
-
-      I / You / We each remain visible
-      for this amount of time.
-    */
-
-    const subjectDuration = 3200;
-
-
-    /*
-      Disability Belongs. remains visible
-      slightly longer before looping.
-    */
-
-    const finalDuration = 4200;
-
 
     /* =================================
-       CLEAR TIMER
+       DISPLAY CURRENT FRAME
     ================================= */
 
-    function clearTimer() {
+    function renderCurrentFrame() {
 
-      if (timer !== null) {
-
-        clearTimeout(timer);
-
-        timer = null;
-      }
-    }
-
-
-    /* =================================
-       SCHEDULE NEXT STEP
-    ================================= */
-
-    function scheduleNext(
-      callback,
-      delay
-    ) {
-
-      clearTimer();
-
-
-      if (
-        paused ||
-        reduceMotion.matches
-      ) {
-        return;
-      }
-
-
-      timer =
-        setTimeout(
-          callback,
-          delay
-        );
-    }
-
-
-    /* =================================
-       SHOW CURRENT SUBJECT
-    ================================= */
-
-    function showSubject(index) {
-
-      currentIndex = index;
-
-      finalState = false;
-
-
-      logoStack.classList.remove(
-        "logo-hidden"
-      );
-
-
-      finalMessage.classList.remove(
-        "visible"
-      );
+      const frame =
+        frames[currentIndex];
 
 
       currentEl.textContent =
-        subjects[index];
+        frame.subject;
 
 
-      currentEl.className =
-        "subject current";
+      endingEl.textContent =
+        frame.ending;
 
 
-      nextEl.textContent =
-        "";
+      if (
+        currentIndex ===
+        frames.length - 1
+      ) {
 
+        belongWrap.classList.add(
+          "final-blue"
+        );
 
-      nextEl.className =
-        "subject next";
+      } else {
+
+        belongWrap.classList.remove(
+          "final-blue"
+        );
+      }
     }
 
 
     /* =================================
-       ANIMATE TO NEXT SUBJECT
+       ANIMATE TO NEXT FRAME
     ================================= */
 
-    function animateToSubject(nextIndex) {
+    function animateTo(nextIndex) {
 
       if (animating) {
         return;
@@ -896,18 +737,17 @@
       animating = true;
 
 
+      const nextFrame =
+        frames[nextIndex];
+
+
       nextEl.textContent =
-        subjects[nextIndex];
+        nextFrame.subject;
 
 
       nextEl.className =
         "subject next";
 
-
-      /*
-        Force browser layout so
-        transition classes animate.
-      */
 
       void nextEl.offsetWidth;
 
@@ -922,11 +762,32 @@
       );
 
 
+      endingEl.textContent =
+        nextFrame.ending;
+
+
+      if (
+        nextIndex ===
+        frames.length - 1
+      ) {
+
+        belongWrap.classList.add(
+          "final-blue"
+        );
+
+      } else {
+
+        belongWrap.classList.remove(
+          "final-blue"
+        );
+      }
+
+
       setTimeout(
         () => {
 
           currentEl.textContent =
-            subjects[nextIndex];
+            nextFrame.subject;
 
 
           currentEl.className =
@@ -948,12 +809,6 @@
           animating =
             false;
 
-
-          scheduleNext(
-            advanceSequence,
-            subjectDuration
-          );
-
         },
         500
       );
@@ -961,191 +816,29 @@
 
 
     /* =================================
-       SHOW FINAL MESSAGE
-
-       Fade away:
-       Be.
-       Belong.
-       Become.
-       We
-
-       Then fade in:
-       Disability Belongs.
+       ADVANCE
     ================================= */
 
-    function showFinalMessage() {
+    function advanceFrame() {
 
-      finalState = true;
-
-      animating = true;
-
-
-      /*
-        Fade the complete white logo stack
-        and azure subject out together.
-      */
-
-      logoStack.classList.add(
-        "logo-hidden"
-      );
+      const nextIndex =
+        (currentIndex + 1)
+        % frames.length;
 
 
-      /*
-        Allow the logo fade to begin,
-        then bring in the separate
-        final azure statement.
-      */
-
-      setTimeout(
-        () => {
-
-          finalMessage.classList.add(
-            "visible"
-          );
-
-
-          animating = false;
-
-
-          scheduleNext(
-            restartSequence,
-            finalDuration
-          );
-
-        },
-        450
+      animateTo(
+        nextIndex
       );
     }
 
 
     /* =================================
-       ADVANCE SEQUENCE
-    ================================= */
-
-    function advanceSequence() {
-
-      if (
-        paused ||
-        reduceMotion.matches ||
-        animating
-      ) {
-        return;
-      }
-
-
-      /*
-        I -> You
-      */
-
-      if (currentIndex === 0) {
-
-        animateToSubject(1);
-
-        return;
-      }
-
-
-      /*
-        You -> We
-      */
-
-      if (currentIndex === 1) {
-
-        animateToSubject(2);
-
-        return;
-      }
-
-
-      /*
-        We -> Disability Belongs.
-      */
-
-      if (currentIndex === 2) {
-
-        showFinalMessage();
-      }
-    }
-
-
-    /* =================================
-       RESTART
-
-       Disability Belongs.
-       fades out first.
-
-       Then the original white logo
-       returns with I.
-    ================================= */
-
-    function restartSequence() {
-
-      if (
-        paused ||
-        reduceMotion.matches
-      ) {
-        return;
-      }
-
-
-      finalState = false;
-
-      animating = true;
-
-
-      finalMessage.classList.remove(
-        "visible"
-      );
-
-
-      setTimeout(
-        () => {
-
-          currentIndex = 0;
-
-
-          currentEl.textContent =
-            subjects[0];
-
-
-          currentEl.className =
-            "subject current";
-
-
-          nextEl.textContent =
-            "";
-
-
-          nextEl.className =
-            "subject next";
-
-
-          logoStack.classList.remove(
-            "logo-hidden"
-          );
-
-
-          animating = false;
-
-
-          scheduleNext(
-            advanceSequence,
-            subjectDuration
-          );
-
-        },
-        500
-      );
-    }
-
-
-    /* =================================
-       START LOOP
+       START
     ================================= */
 
     function startLoop() {
 
-      clearTimer();
+      stopLoop();
 
 
       if (
@@ -1156,35 +849,26 @@
       }
 
 
-      /*
-        Resume from whichever visual
-        state is currently displayed.
-      */
-
-      if (finalState) {
-
-        scheduleNext(
-          restartSequence,
-          finalDuration
+      timer =
+        setInterval(
+          advanceFrame,
+          3200
         );
-
-      } else {
-
-        scheduleNext(
-          advanceSequence,
-          subjectDuration
-        );
-      }
     }
 
 
     /* =================================
-       STOP LOOP
+       STOP
     ================================= */
 
     function stopLoop() {
 
-      clearTimer();
+      if (timer !== null) {
+
+        clearInterval(timer);
+
+        timer = null;
+      }
     }
 
 
@@ -1227,59 +911,16 @@
 
     /* =================================
        REDUCED MOTION
-
-       Show only the final static phrase:
-
-       Disability Belongs.
     ================================= */
 
     function showReducedMotionState() {
 
-      clearTimer();
-
-
-      finalState = true;
-
-      animating = false;
-
-
-      logoStack.classList.add(
-        "logo-hidden"
-      );
-
-
-      finalMessage.classList.add(
-        "visible"
-      );
-
-
-      pauseBtn.hidden =
-        true;
-    }
-
-
-    /* =================================
-       DEFAULT STATE
-
-             Be.
-        I    Belong.
-             Become.
-    ================================= */
-
-    function showDefaultState() {
-
-      clearTimer();
-
-
-      currentIndex = 0;
-
-      finalState = false;
-
-      animating = false;
+      currentIndex =
+        frames.length - 1;
 
 
       currentEl.textContent =
-        subjects[0];
+        frames[currentIndex].subject;
 
 
       currentEl.className =
@@ -1294,24 +935,46 @@
         "subject next";
 
 
-      finalMessage.classList.remove(
-        "visible"
+      endingEl.textContent =
+        frames[currentIndex].ending;
+
+
+      belongWrap.classList.add(
+        "final-blue"
       );
-
-
-      logoStack.classList.remove(
-        "logo-hidden"
-      );
-
-
-      pauseBtn.hidden =
-        false;
     }
 
 
-    /* =================================
-       RESPOND TO MOTION PREFERENCE
-    ================================= */
+    function showDefaultState() {
+
+      currentIndex = 0;
+
+
+      currentEl.textContent =
+        frames[0].subject;
+
+
+      currentEl.className =
+        "subject current";
+
+
+      nextEl.textContent =
+        "";
+
+
+      nextEl.className =
+        "subject next";
+
+
+      endingEl.textContent =
+        frames[0].ending;
+
+
+      belongWrap.classList.remove(
+        "final-blue"
+      );
+    }
+
 
     function handleReducedMotion(event) {
 
@@ -1322,9 +985,15 @@
 
         showReducedMotionState();
 
+        pauseBtn.hidden =
+          true;
+
       } else {
 
         showDefaultState();
+
+        pauseBtn.hidden =
+          false;
 
 
         if (!paused) {
@@ -1367,6 +1036,9 @@
     ) {
 
       showReducedMotionState();
+
+      pauseBtn.hidden =
+        true;
 
     } else {
 
